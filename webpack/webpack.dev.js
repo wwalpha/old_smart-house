@@ -1,6 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HappyPack = require('happypack');
 
 module.exports = {
   mode: 'development',
@@ -42,7 +43,10 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.EnvironmentPlugin({ API_URL: '' }),
+    new HappyPack({
+      loaders: ['babel-loader', 'eslint-loader'],
+    }),
+    new webpack.EnvironmentPlugin('MOBILE'),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
@@ -53,5 +57,9 @@ module.exports = {
       hash: true,
       inject: 'body',
     }),
+    new webpack.LoaderOptionsPlugin({
+      debug: false,
+    }),
   ],
+  bail: true,
 };

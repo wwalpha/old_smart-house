@@ -18,29 +18,61 @@
     },
     "globals": {
         "module": true,
-	    "require": true
+        "require": true
     },
     "plugins": [
         "react",
         "import"
     ],
     "rules": {
-        "indent": ["error", 2],
-        "linebreak-style": [ "error","unix"],
-        "quotes": ["error","single"],
-        "semi": ["error","always"],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "react/prefer-stateless-function": [0],
-        "react/require-default-props": [0],
-        "react/no-array-index-key": [0],
-        "max-len": ["error", 160]
+        "indent": [
+            "error",
+            2
+        ],
+        "linebreak-style": [
+            "error",
+            "unix"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+        "react/jsx-filename-extension": [
+            1,
+            {
+                "extensions": [
+                    ".js",
+                    ".jsx"
+                ]
+            }
+        ],
+        "react/prefer-stateless-function": [
+            0
+        ],
+        "react/require-default-props": [
+            0
+        ],
+        "react/no-array-index-key": [
+            0
+        ],
+        "max-len": [
+            "error",
+            160
+        ]
     },
     "settings": {
         "import/resolver": {
             "webpack": {
-				"config": "webpack.dev.js"
-			}
+                "config": "./webpack/webpack.dev.js"
+            }
         },
-        "import/extensions": ["js", "jsx"]
+        "import/extensions": [
+            "js",
+            "jsx"
+        ]
     }
 }

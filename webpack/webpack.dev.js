@@ -17,7 +17,7 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
     alias: {
-      src: path.resolve(__dirname, 'src/'),
+      src: path.resolve(__dirname, '../src/'),
       ui: path.resolve(__dirname, 'src/components/common/'),
       components: path.resolve(__dirname, 'src/components/'),
       utils: path.resolve(__dirname, 'src/utils/'),
@@ -46,9 +46,9 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Study Front',
+      title: 'GoogleHome Chat',
       filename: 'index.html',
-      template: path.join(__dirname, 'index.template.ejs'),
+      template: path.join(__dirname, '../index.template.ejs'),
       minify: false,
       hash: true,
       inject: 'body',

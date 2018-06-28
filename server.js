@@ -1,13 +1,12 @@
 const webpack = require('webpack');
-const webpackConfig = require('./webpack.dev');
-
+const express = require('express');
 const dev = require('webpack-dev-middleware');
 const hot = require('webpack-hot-middleware');
 const path = require('path');
 
-const compiler = webpack(webpackConfig);
-const express = require('express');
+const webpackConfig = require('./webpack/webpack.dev');
 
+const compiler = webpack(webpackConfig);
 const app = express();
 
 app.use(dev(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
@@ -28,4 +27,3 @@ app.use('*', (req, res, next) => {
 });
 
 app.listen(3000, () => console.log('Example app listening on port 3000!'));
-

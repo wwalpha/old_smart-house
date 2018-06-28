@@ -1,16 +1,28 @@
 {
   "presets": [
-    "react",
-    ["env", {
-      "targets": {
-        "browsers": ["last 2 versions", "safari >= 7"]
-      },
-      "modules": false
-    }]
+    "@babel/preset-react",
+    [
+      "@babel/preset-env",
+      {
+        "targets": {
+          "browsers": [
+            "last 2 versions",
+            "safari >= 7"
+          ]
+        },
+        "modules": false
+      }
+    ]
   ],
   "plugins": [
     "react-hot-loader/babel",
-    "transform-class-properties",
-    ["transform-object-rest-spread", { "useBuiltIns": true }]
+    "@babel/plugin-proposal-class-properties",
+    [
+      "@babel/plugin-proposal-object-rest-spread",
+      {
+        "loose": true,
+        "useBuiltIns": true
+      }
+    ]
   ]
 }

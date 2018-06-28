@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "baseUrl": ".",
+        "paths": {
+            "src/*": ["./src/*"],
+            "ui/*": ["./src/components/common/*"],
+            "components/*": ["./src/components/*"],
+            "utils/*": ["./src/utils/*"],
+            "constant/*": ["./src/constant/*"],
+            "containers/*": ["./src/containers/*"],
+            "reducers/*": ["./src/reducers/*"]
+        }
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

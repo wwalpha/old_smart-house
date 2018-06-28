@@ -18,7 +18,8 @@
     },
     "globals": {
         "module": true,
-        "require": true
+        "require": true,
+        "cordova": true
     },
     "plugins": [
         "react",

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
-    "mobile": "cross-env MOBILE=true node server.js",
+    "mobile": "cross-env MOBILE=true webpack -w --config ./webpack/webpack.mobile.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

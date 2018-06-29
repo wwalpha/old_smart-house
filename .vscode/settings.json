@@ -21,6 +21,6 @@
     "**/README.md": true,
     "**/.babelrc": true,
     "**/.eslintrc": true,
-    "**/jsconfig.json": true,
+    // "**/jsconfig.json": true,
   }
 }

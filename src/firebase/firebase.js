@@ -8,3 +8,4 @@ import { firebaseConfig } from './config';
 export const firebaseApp = firebase.initializeApp(firebaseConfig);
 export const firebaseAuth = firebase.auth();
 export const firebaseDb = firebase.database();
+export const storage = firebase.storage();

@@ -19,12 +19,14 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       src: path.resolve(__dirname, '../src/'),
-      ui: path.resolve(__dirname, 'src/components/common/'),
-      components: path.resolve(__dirname, 'src/components/'),
-      utils: path.resolve(__dirname, 'src/utils/'),
-      constant: path.resolve(__dirname, 'src/constant/'),
-      containers: path.resolve(__dirname, 'src/containers/'),
-      reducers: path.resolve(__dirname, 'src/reducers/'),
+      fb: path.resolve(__dirname, '../src/firebase/'),
+
+      // ui: path.resolve(__dirname, 'src/components/common/'),
+      // components: path.resolve(__dirname, 'src/components/'),
+      // utils: path.resolve(__dirname, 'src/utils/'),
+      // constant: path.resolve(__dirname, 'src/constant/'),
+      // containers: path.resolve(__dirname, 'src/containers/'),
+      // reducers: path.resolve(__dirname, 'src/reducers/'),
     },
   },
   module: {

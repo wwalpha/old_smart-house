@@ -7,6 +7,9 @@
             "src/*": [
                 "./src/*"
             ],
+            "fb/*": [
+                "./src/firebase/*"
+            ],
             "ui/*": [
                 "./src/components/common/*"
             ],

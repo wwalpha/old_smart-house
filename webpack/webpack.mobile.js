@@ -18,7 +18,7 @@ module.exports = {
     extensions: ['.js', '.jsx'],
     alias: {
       src: path.resolve(__dirname, '../src/'),
-      platforms: path.resolve(__dirname, '../platforms/'),
+      fb: path.resolve(__dirname, '../src/firebase/'),
     },
   },
   module: {

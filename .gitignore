@@ -1,3 +1,4 @@
 /node_modules
-/www/bundle.js
-/functions/node_modules
+/firebase/functions/node_modules
+/cordova/www/bundle.js
+/cordova/node_modules

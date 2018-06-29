@@ -4,5 +4,22 @@
   "eslint.autoFixOnSave": true,
   "eslint.workingDirectories": [
     "src"
-  ]
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/.gitignore": true,
+    "**/.npmignore": true,
+    "**/.eslintignore": true,
+    "**/.babelrc": true,
+    "**/*.lock": true,
+    "**/.vscode": true,
+    "**/hooks": true,
+    "**/plugins": true,
+    "**/res": true,
+    "**/README.md": true,
+  }
 }

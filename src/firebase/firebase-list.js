@@ -79,6 +79,6 @@ export default class FirebaseList {
   unwrapSnapshot(snapshot) {
     const attrs = snapshot.val();
     attrs.key = snapshot.key;
-    return new this.modelClass(attrs);
+    return new this.ModelClass(attrs);
   }
 }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import { storage } from 'fb';
 
 class App extends Component {
   static propTypes = {

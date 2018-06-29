@@ -34,5 +34,5 @@
             <string>need to photo library access to get pictures from there</string>
         </edit-config>
     </plugin>
-    <engine name="ios" spec="~4.5.4" />
+    <engine name="ios" spec="^4.5.4" />
 </widget>

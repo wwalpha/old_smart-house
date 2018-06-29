@@ -9,22 +9,29 @@ class App extends Component {
     classes: PropTypes.objectOf(PropTypes.string),
   }
 
-  handleStart = () => {
-    console.log('start');
-    navigator.device.capture.captureAudio((mediaFiles) => {
-      console.log(mediaFiles);
-    }, err => console.error(err), {
-      limit: 5,
-    });
+  state = {
+    audioPath: undefined,
   }
 
-  handleStop = () => {
-    console.error('error');
+  handleStart = () => {
+    navigator.device.capture.captureAudio((mediaFiles) => {
+      console.log(mediaFiles);
+
+      // max one
+      mediaFiles.forEach((fullPath) => {
+        this.setState({ audioPath: fullPath });
+      });
+    }, err => console.error(err));
+  }
+
+  handlePlay = () => {
+    console.log('start play');
+    this.audio.play();
   }
 
   render() {
     const { classes } = this.props;
-
+    const { audioPath } = this.state;
     return (
       <React.Fragment>
         <Button
@@ -39,10 +46,14 @@ class App extends Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={this.handleStop}
+          onClick={this.handlePlay}
         >
-          停止
+          再生
         </Button>
+        <audio ref={(audio) => { this.audio = audio; }} controls={false}>
+          <source src={audioPath} />
+          <track kind="captions" label="English captions" default />
+        </audio>
       </React.Fragment>
     );
   }

@@ -7,9 +7,6 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "alpha.iot.homechat"
-    },
     "cordova-plugin-ios-camera-permissions": {
       "CAMERA_USAGE_DESCRIPTION": "This app needs camera access",
       "MICROPHONE_USAGE_DESCRIPTION": "This app needs microphone access",
@@ -19,6 +16,9 @@
     },
     "cordova-plugin-media": {
       "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO",
+      "PACKAGE_NAME": "alpha.iot.homechat"
+    },
+    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "alpha.iot.homechat"
     }
   },

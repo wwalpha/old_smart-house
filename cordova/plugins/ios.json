@@ -17,18 +17,12 @@
       "PHOTOLIBRARY_USAGE_DESCRIPTION": "This app needs read/write-access photo library access",
       "PACKAGE_NAME": "alpha.iot.homechat"
     },
-    "cordova-plugin-audioinput": {
-      "PACKAGE_NAME": "alpha.iot.homechat"
-    },
     "cordova-plugin-media": {
       "KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE": "NO",
       "PACKAGE_NAME": "alpha.iot.homechat"
     }
   },
   "dependent_plugins": {
-    "cordova-plugin-compat": {
-      "PACKAGE_NAME": "alpha.iot.homechat"
-    },
     "cordova-plugin-file": {
       "PACKAGE_NAME": "alpha.iot.homechat"
     }

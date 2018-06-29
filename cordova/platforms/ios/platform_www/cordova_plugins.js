@@ -1,14 +1,6 @@
 cordova.define('cordova/plugin_list', function(require, exports, module) {
 module.exports = [
   {
-    "id": "cordova-plugin-audioinput.AudioInput",
-    "file": "plugins/cordova-plugin-audioinput/www/audioInputCapture.js",
-    "pluginId": "cordova-plugin-audioinput",
-    "clobbers": [
-      "audioinput"
-    ]
-  },
-  {
     "id": "cordova-plugin-file.DirectoryEntry",
     "file": "plugins/cordova-plugin-file/www/DirectoryEntry.js",
     "pluginId": "cordova-plugin-file",
@@ -203,8 +195,6 @@ module.exports.metadata =
 {
   "cordova-plugin-whitelist": "1.3.3",
   "cordova-plugin-ios-camera-permissions": "1.2.0",
-  "cordova-plugin-compat": "1.2.0",
-  "cordova-plugin-audioinput": "1.0.1",
   "cordova-plugin-file": "6.0.1",
   "cordova-plugin-media": "5.0.2"
 };

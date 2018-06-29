@@ -13,13 +13,6 @@
 		302D95F114D2391D003F00A1 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 302D95EF14D2391D003F00A1 /* MainViewController.m */; };
 		302D95F214D2391D003F00A1 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 302D95F014D2391D003F00A1 /* MainViewController.xib */; };
 		6AFF5BF91D6E424B00AB3073 /* CDVLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AFF5BF81D6E424B00AB3073 /* CDVLaunchScreen.storyboard */; };
-		972847E9EB3A42E6BF7103E3 /* CDVAudioInputCapture.m in Sources */ = {isa = PBXBuildFile; fileRef = 70DEE561EFC9406E86B9F1D9 /* CDVAudioInputCapture.m */; };
-		82EE4D55068B4639B6C0FE88 /* AudioReceiver.h in Resources */ = {isa = PBXBuildFile; fileRef = 15D3C51B4626439894FF135E /* AudioReceiver.h */; };
-		307A7B284918415DBDB77B9F /* AudioReceiver.m in Sources */ = {isa = PBXBuildFile; fileRef = B507A9F8CC574EA48B74709E /* AudioReceiver.m */; };
-		69661543881541AAA8D53FA6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE8FEBA56CC1452AA49070B2 /* Accelerate.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		2D8DCFF9A77344AFA2EF15F1 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F7291064F63B4493A2F514F4 /* CoreAudio.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		934C683585CE4D85825EA567 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B22814DCEA8D46E19E553076 /* AudioToolbox.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		83321D244B994761BF6B346A /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5837A4CBFAA42329D8253C9 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		3F806C8F92AE40018459C48B /* CDVFile.m in Sources */ = {isa = PBXBuildFile; fileRef = A4983A51F7AC493A9E9E77BE /* CDVFile.m */; };
 		B69182936F0846E380B32BCA /* CDVLocalFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = B30A9D9904284A55883CC1EE /* CDVLocalFilesystem.m */; };
 		DCF568ED276D4EF2B8249465 /* CDVAssetLibraryFilesystem.m in Sources */ = {isa = PBXBuildFile; fileRef = E216C5BB279246C88349639D /* CDVAssetLibraryFilesystem.m */; };
@@ -71,13 +64,6 @@
 		EB87FDF41871DAF40020F90C /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = ../../config.xml; sourceTree = "<group>"; };
 		ED33DF2A687741AEAF9F8254 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		F840E1F0165FE0F500CFE078 /* config.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = config.xml; path = GoogleHomeChat/config.xml; sourceTree = "<group>"; };
-		70DEE561EFC9406E86B9F1D9 /* CDVAudioInputCapture.m */ = {isa = PBXFileReference; name = "CDVAudioInputCapture.m"; path = "cordova-plugin-audioinput/CDVAudioInputCapture.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		15D3C51B4626439894FF135E /* AudioReceiver.h */ = {isa = PBXFileReference; name = "AudioReceiver.h"; path = "cordova-plugin-audioinput/AudioReceiver.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
-		B507A9F8CC574EA48B74709E /* AudioReceiver.m */ = {isa = PBXFileReference; name = "AudioReceiver.m"; path = "cordova-plugin-audioinput/AudioReceiver.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
-		EE8FEBA56CC1452AA49070B2 /* Accelerate.framework */ = {isa = PBXFileReference; name = "Accelerate.framework"; path = "System/Library/Frameworks/Accelerate.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		F7291064F63B4493A2F514F4 /* CoreAudio.framework */ = {isa = PBXFileReference; name = "CoreAudio.framework"; path = "System/Library/Frameworks/CoreAudio.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		B22814DCEA8D46E19E553076 /* AudioToolbox.framework */ = {isa = PBXFileReference; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
-		F5837A4CBFAA42329D8253C9 /* AVFoundation.framework */ = {isa = PBXFileReference; name = "AVFoundation.framework"; path = "System/Library/Frameworks/AVFoundation.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
 		A4983A51F7AC493A9E9E77BE /* CDVFile.m */ = {isa = PBXFileReference; name = "CDVFile.m"; path = "cordova-plugin-file/CDVFile.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		B30A9D9904284A55883CC1EE /* CDVLocalFilesystem.m */ = {isa = PBXFileReference; name = "CDVLocalFilesystem.m"; path = "cordova-plugin-file/CDVLocalFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
 		E216C5BB279246C88349639D /* CDVAssetLibraryFilesystem.m */ = {isa = PBXFileReference; name = "CDVAssetLibraryFilesystem.m"; path = "cordova-plugin-file/CDVAssetLibraryFilesystem.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
@@ -94,10 +80,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
-				69661543881541AAA8D53FA6 /* Accelerate.framework in Frameworks */,
-				2D8DCFF9A77344AFA2EF15F1 /* CoreAudio.framework in Frameworks */,
-				934C683585CE4D85825EA567 /* AudioToolbox.framework in Frameworks */,
-				83321D244B994761BF6B346A /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -168,10 +150,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				EE8FEBA56CC1452AA49070B2 /* Accelerate.framework */,
-				F7291064F63B4493A2F514F4 /* CoreAudio.framework */,
-				B22814DCEA8D46E19E553076 /* AudioToolbox.framework */,
-				F5837A4CBFAA42329D8253C9 /* AVFoundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -198,9 +176,6 @@
 		307C750510C5A3420062BCA9 /* Plugins */ = {
 			isa = PBXGroup;
 			children = (
-				70DEE561EFC9406E86B9F1D9 /* CDVAudioInputCapture.m */,
-				15D3C51B4626439894FF135E /* AudioReceiver.h */,
-				B507A9F8CC574EA48B74709E /* AudioReceiver.m */,
 				A4983A51F7AC493A9E9E77BE /* CDVFile.m */,
 				B30A9D9904284A55883CC1EE /* CDVLocalFilesystem.m */,
 				E216C5BB279246C88349639D /* CDVAssetLibraryFilesystem.m */,
@@ -337,9 +312,6 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				1D3623260D0F684500981E51 /* AppDelegate.m in Sources */,
 				302D95F114D2391D003F00A1 /* MainViewController.m in Sources */,
-				972847E9EB3A42E6BF7103E3 /* CDVAudioInputCapture.m in Sources */,
-				82EE4D55068B4639B6C0FE88 /* AudioReceiver.h in Resources */,
-				307A7B284918415DBDB77B9F /* AudioReceiver.m in Sources */,
 				3F806C8F92AE40018459C48B /* CDVFile.m in Sources */,
 				B69182936F0846E380B32BCA /* CDVLocalFilesystem.m in Sources */,
 				DCF568ED276D4EF2B8249465 /* CDVAssetLibraryFilesystem.m in Sources */,

@@ -2,3 +2,10 @@
 /firebase/functions/node_modules
 /cordova/www/bundle.js
 /cordova/node_modules
+/.vscode/simulate/sim-host.json
+/.vscode/simulate/sim-host.js
+/.vscode/simulate/app-host.js
+/.vscode/simulate/app-host.json
+cordova/www/index.html
+cordova/platforms/ios/www/index.html
+cordova/platforms/ios/www/bundle.js

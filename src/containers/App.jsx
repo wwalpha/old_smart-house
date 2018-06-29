@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { hot } from 'react-hot-loader';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import MicIcon from '@material-ui/icons/Mic';
 
 class App extends Component {
   static propTypes = {
@@ -10,37 +11,48 @@ class App extends Component {
   }
 
   state = {
-    audioPath: undefined,
+    media: undefined,
+    micDisabled: false,
   }
 
   handleStart = () => {
-    navigator.device.capture.captureAudio((mediaFiles) => {
-      console.log(mediaFiles);
+    const media = new Media('test.wav');
 
-      // max one
-      mediaFiles.forEach((fullPath) => {
-        this.setState({ audioPath: fullPath });
-      });
-    }, err => console.error(err));
+    // Record audio
+    media.startRecord();
+    // Record 10s
+    setTimeout(() => media.stopRecord(), 10000);
+
+    this.setState({
+      media,
+      micDisabled: true,
+    });
   }
 
   handlePlay = () => {
-    console.log('start play');
-    this.audio.play();
+    const { media } = this.state;
+
+    media.stopRecord();
+    media.play();
+
+    this.setState({ media: undefined, micDisabled: false });
   }
 
   render() {
     const { classes } = this.props;
-    const { audioPath } = this.state;
+    const { audioPath, micDisabled } = this.state;
+
+    console.log(audioPath);
     return (
       <React.Fragment>
         <Button
-          variant="contained"
+          variant="fab"
           color="primary"
           className={classes.button}
           onClick={this.handleStart}
+          disabled={micDisabled}
         >
-          開始
+          <MicIcon />
         </Button>
         <Button
           variant="contained"
@@ -50,8 +62,7 @@ class App extends Component {
         >
           再生
         </Button>
-        <audio ref={(audio) => { this.audio = audio; }} controls={false}>
-          <source src={audioPath} />
+        <audio src={audioPath} ref={(audio) => { this.audio = audio; }} controls>
           <track kind="captions" label="English captions" default />
         </audio>
       </React.Fragment>

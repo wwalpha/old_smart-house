@@ -19,7 +19,8 @@
     "globals": {
         "module": true,
         "require": true,
-        "cordova": true
+        "cordova": true,
+        "Media": true
     },
     "plugins": [
         "react",

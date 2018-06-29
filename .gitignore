@@ -1,6 +1,7 @@
 /node_modules
 /firebase/functions/node_modules
 /cordova/www/bundle.js
+/cordova/www/index.html
 /cordova/node_modules
 /.vscode/simulate/sim-host.json
 /.vscode/simulate/sim-host.js

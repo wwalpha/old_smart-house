@@ -5,13 +5,12 @@ import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
 import { Props } from './App.d';
 
-
 class App extends React.Component<Props, {}> {
 
   state = {
     micClicked: false,
     media: new Media('record.wav', () => { }),
-  }
+  };
 
   handleStart = () => {
     const { micClicked, media } = this.state;
@@ -67,7 +66,6 @@ class App extends React.Component<Props, {}> {
 //   actions: bindActionCreators(AppActions, dispatch),
 // });
 
-
 // export default connect(
 //   mapStateToProps,
 //   mapDispatchToProps,
@@ -80,7 +78,7 @@ const styles = (theme: Theme): StyleRules => ({
   clicked: {
     margin: '0px 8px',
     backgroundColor: theme.palette.secondary.main,
-  }
+  },
 });
 
 export default hot(module)(withStyles(styles)(App));

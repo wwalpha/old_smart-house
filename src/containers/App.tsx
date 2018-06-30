@@ -1,53 +1,48 @@
 import * as React from 'react';
 import { hot } from 'react-hot-loader';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, StyleRules, StyleRulesCallback, Theme } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
 import { Props } from './App.d';
 
+
 class App extends React.Component<Props, {}> {
 
   state = {
-    media: undefined,
-    micDisabled: false,
+    micClicked: false,
+    media: new Media('record.wav', () => { }),
   }
 
   handleStart = () => {
-    // const media = new Media('test.wav', () => { });
+    const { micClicked, media } = this.state;
 
-    // // Record audio
-    // media.startRecord();
-    // // Record 10s
-    // setTimeout(() => media.stopRecord(), 10000);
+    if (!micClicked) {
+      media.startRecord();
+    } else {
+      media.stopRecord();
+    }
 
-    // this.setState({
-    //   media,
-    //   micDisabled: true,
-    // });
+    this.setState({ micClicked: !micClicked });
   }
 
   handlePlay = () => {
-    // const { media } = this.state;
+    const { media } = this.state;
 
-    // media.stopRecord();
-    // media.play();
-
-    // this.setState({ media: undefined, micDisabled: false });
+    media.play();
+    media.release();
   }
 
   render() {
     const { classes } = this.props;
-    const { audioPath, micDisabled } = this.state;
+    const { micClicked } = this.state;
 
-    console.log(audioPath);
     return (
       <React.Fragment>
         <Button
           variant="fab"
           color="primary"
-          className={classes.button}
+          className={micClicked ? classes.clicked : classes.button}
           onClick={this.handleStart}
-          disabled={micDisabled}
         >
           <MicIcon />
         </Button>
@@ -59,9 +54,6 @@ class App extends React.Component<Props, {}> {
         >
           再生
         </Button>
-        <audio src={audioPath} ref={(audio) => { this.audio = audio; }} controls>
-          <track kind="captions" label="English captions" default />
-        </audio>
       </React.Fragment>
     );
   }
@@ -81,10 +73,14 @@ class App extends React.Component<Props, {}> {
 //   mapStateToProps,
 //   mapDispatchToProps,
 // )(hot(module)(App));
-const styles = {
+const styles = (theme: Theme): StyleRules => ({
   button: {
     margin: '0px 8px',
+    backgroundColor: theme.palette.primary.main,
   },
-};
+  clicked: {
+    backgroundColor: theme.palette.secondary.main,
+  }
+});
 
 export default hot(module)(withStyles(styles)(App));

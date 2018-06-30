@@ -7,13 +7,13 @@ import App from 'src/containers/App';
 
 const start = () => {
   render(
-       <App />,
-       document.getElementById('root'),
-   );
+    <App />,
+    document.getElementById('root'),
+  );
 };
 
 const app = {
-    // Application Constructor
+  // Application Constructor
   initialize: (): void => {
     document.addEventListener('deviceready', this.deviceReady.bind(this), false);
   },
@@ -25,7 +25,8 @@ const app = {
 };
 
 if (isMobile) {
-  app.initialize();
+  // app.initialize();
+  start();
 } else {
   start();
 }

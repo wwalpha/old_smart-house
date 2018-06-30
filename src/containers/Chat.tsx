@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect, MapStateToPropsParam } from 'react-redux';
 import { withStyles, StyleRules, Theme } from '@material-ui/core/styles';
 import { Props, DispatchProps, StateProps } from './Chat.d';
 import Bottom from 'components/chat/Bottom';
@@ -37,7 +37,8 @@ const styles = (theme: Theme): StyleRules => ({
   },
 });
 
-const mapStateToProps = (state: StateProps) => ({
+const mapStateToProps = (state: StateProps): MapStateToPropsParam<StateProps, void, any> => ({
+
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>) => ({

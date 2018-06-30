@@ -16,13 +16,19 @@ class Bottom extends React.Component<Props, {}> {
   handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
 
   handleRecord = () => {
+    const { saveRecordFile } = this.props;
     const { isRecording, media } = this.state;
     if (isMobile) {
       this.setState({ isRecording: !isRecording });
       return;
     }
     if (isRecording) {
-      if (media) media.stopRecord();
+      if (media && saveRecordFile) {
+        media.stopRecord();
+
+        console.log(media);
+        saveRecordFile(media);
+      }
     } else {
       const filename = `${getTimeStamp()}.wav`;
       const media = new Media(filename, () => { });

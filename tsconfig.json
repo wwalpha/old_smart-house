@@ -29,8 +29,8 @@
       "utils/*": [
         "./src/utils/*"
       ],
-      "actions": [
-        "./src/actions/index"
+      "actions/*": [
+        "./src/actions/*"
       ],
       "components/*": [
         "./src/components/*"

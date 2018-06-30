@@ -1,7 +1,7 @@
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
 
 export interface Props extends WithStyles<StyleRules> {
-  addRecordFile?: (filepath: string) => void,
+  saveRecordFile?: (media: Media) => void,
 }
 
 export interface State {

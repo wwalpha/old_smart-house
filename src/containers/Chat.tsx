@@ -5,17 +5,19 @@ import { withStyles, StyleRules, Theme } from '@material-ui/core/styles';
 import { Props, DispatchProps, StateProps } from './Chat.d';
 import Bottom from 'components/chat/Bottom';
 import Main from 'components/chat/Main';
-import { ChatActions } from 'actions';
+import { ChatActions } from 'actions/index';
 
 class Chat extends React.Component<Props, {}> {
 
   render() {
-    const { classes } = this.props;
+    const { actions } = this.props;
 
     return (
       <React.Fragment>
         <Main />
-        <Bottom />
+        <Bottom
+          saveRecordFile={actions.saveRecordFile}
+        />
       </React.Fragment>
     );
   }

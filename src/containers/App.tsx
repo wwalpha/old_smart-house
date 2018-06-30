@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { hot } from 'react-hot-loader';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
+import { Props } from './App.d';
 
-class App extends Component {
-  static propTypes = {
-    classes: PropTypes.objectOf(PropTypes.string),
-  }
+class App extends React.Component<Props, {}> {
 
   state = {
     media: undefined,
@@ -16,26 +13,26 @@ class App extends Component {
   }
 
   handleStart = () => {
-    const media = new Media('test.wav');
+    // const media = new Media('test.wav', () => { });
 
-    // Record audio
-    media.startRecord();
-    // Record 10s
-    setTimeout(() => media.stopRecord(), 10000);
+    // // Record audio
+    // media.startRecord();
+    // // Record 10s
+    // setTimeout(() => media.stopRecord(), 10000);
 
-    this.setState({
-      media,
-      micDisabled: true,
-    });
+    // this.setState({
+    //   media,
+    //   micDisabled: true,
+    // });
   }
 
   handlePlay = () => {
-    const { media } = this.state;
+    // const { media } = this.state;
 
-    media.stopRecord();
-    media.play();
+    // media.stopRecord();
+    // media.play();
 
-    this.setState({ media: undefined, micDisabled: false });
+    // this.setState({ media: undefined, micDisabled: false });
   }
 
   render() {

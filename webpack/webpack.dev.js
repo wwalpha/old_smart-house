@@ -7,8 +7,8 @@ module.exports = {
   mode: 'development',
   devtool: 'cheap-module-eval-source-map',
   entry: [
+    './index.tsx',
     'webpack-hot-middleware/client',
-    './index.js',
   ],
   output: {
     filename: 'bundle.js',
@@ -16,37 +16,50 @@ module.exports = {
     publicPath: '/',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.ts', '.tsx', '.js'],
     alias: {
       src: path.resolve(__dirname, '../src/'),
       fb: path.resolve(__dirname, '../src/firebase/'),
-
-      // ui: path.resolve(__dirname, 'src/components/common/'),
-      // components: path.resolve(__dirname, 'src/components/'),
-      // utils: path.resolve(__dirname, 'src/utils/'),
-      // constant: path.resolve(__dirname, 'src/constant/'),
-      // containers: path.resolve(__dirname, 'src/containers/'),
-      // reducers: path.resolve(__dirname, 'src/reducers/'),
     },
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
-        use: 'babel-loader',
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              cacheDirectory: true,
+              plugins: [
+                '@babel/plugin-syntax-typescript',
+                ["@babel/plugin-proposal-decorators", { "legacy": true }],
+                '@babel/plugin-syntax-jsx',
+                'react-hot-loader/babel',
+              ],
+            },
+          },
+          {
+            loader: 'ts-loader',
+            options: {
+              transpileOnly: true,
+              happyPackMode: true
+            }
+          }
+        ],
       },
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         exclude: /node_modules/,
-        use: ['source-map-loader', 'eslint-loader'],
+        use: 'source-map-loader',
         enforce: 'pre',
       },
-    ],
+    ]
   },
   plugins: [
     new HappyPack({
-      loaders: ['babel-loader', 'eslint-loader'],
+      loaders: ['babel-loader', 'ts-loader'],
     }),
     new webpack.EnvironmentPlugin('MOBILE'),
     new webpack.HotModuleReplacementPlugin(),

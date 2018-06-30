@@ -29,7 +29,6 @@ class App extends React.Component<Props, {}> {
     const { media } = this.state;
 
     media.play();
-    media.release();
   }
 
   render() {
@@ -79,6 +78,7 @@ const styles = (theme: Theme): StyleRules => ({
     backgroundColor: theme.palette.primary.main,
   },
   clicked: {
+    margin: '0px 8px',
     backgroundColor: theme.palette.secondary.main,
   }
 });

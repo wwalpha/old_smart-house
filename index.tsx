@@ -1,6 +1,7 @@
 import * as React from 'react';
 // import { Provider } from 'react-redux';
 import { render } from 'react-dom';
+import { isMobile } from 'react-device-detect';
 // import store from 'src/store';
 import App from 'src/containers/App';
 
@@ -23,10 +24,8 @@ const app = {
   },
 };
 
-if (process.env.MOBILE) {
+if (isMobile) {
   app.initialize();
 } else {
-
-  console.log(device);
   start();
 }

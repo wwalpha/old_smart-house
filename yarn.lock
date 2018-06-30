@@ -777,6 +777,13 @@
     "@types/react" "*"
     redux "^3.6.0"
 
+"@types/redux-immutable@^3.0.38":
+  version "3.0.38"
+  resolved "https://registry.yarnpkg.com/@types/redux-immutable/-/redux-immutable-3.0.38.tgz#9e2fcce4a9c64e60f13de2165d2765f7af85d487"
+  dependencies:
+    immutable "^3.8.1"
+    redux "^3.6.0"
+
 "@types/redux-logger@^3.0.6":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/@types/redux-logger/-/redux-logger-3.0.6.tgz#4cf9d5b596b576b030a4bb671547f0ab63f81a73"

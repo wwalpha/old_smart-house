@@ -16,8 +16,4 @@ const dev = {
   ],
 };
 
-const merged = merge(baseConfig, dev);
-
-console.log(merged);
-
 module.exports=merge(baseConfig, dev);

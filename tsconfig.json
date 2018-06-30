@@ -26,8 +26,17 @@
       "src/*": [
         "./src/*"
       ],
-      "utils": [
+      "utils/*": [
         "./src/utils/*"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "models": [
+        "./src/models/index"
+      ],
+      "ActionTypes": [
+        "./src/constants/ActionTypes"
       ]
     }
   },

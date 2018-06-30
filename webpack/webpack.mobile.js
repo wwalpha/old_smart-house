@@ -13,7 +13,5 @@ const mobile = {
 
 const merged = merge(baseConfig, mobile);
 
-console.log(merged);
-
-module.exports=merged;
+module.exports = merged;
 

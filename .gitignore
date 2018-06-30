@@ -11,3 +11,4 @@ cordova/www/index.html
 cordova/platforms/ios/www/index.html
 cordova/platforms/ios/www/bundle.js
 /cordova/platforms
+/cordova/plugins

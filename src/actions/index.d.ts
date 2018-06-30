@@ -1,1 +1,1 @@
-export * from './Auth.d'
+export * from './chat.d';

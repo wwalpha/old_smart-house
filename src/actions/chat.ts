@@ -3,4 +3,4 @@ import {
   SAVE_MEDIA,
 } from 'src/constants/ActionTypes';
 
-export const save = createAction(SAVE_MEDIA, (media: any) => media);
+export const save = createAction(SAVE_MEDIA, (media: Media) => media);

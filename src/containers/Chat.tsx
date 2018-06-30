@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { withStyles, StyleRules, Theme } from '@material-ui/core/styles';
-import { Props } from './Chat.d';
+import { Props, DispatchProps, StateProps } from './Chat.d';
 import Bottom from 'components/chat/Bottom';
+import Main from 'components/chat/Main';
+import { ChatActions } from 'actions';
 
 class Chat extends React.Component<Props, {}> {
 
@@ -10,6 +14,7 @@ class Chat extends React.Component<Props, {}> {
 
     return (
       <React.Fragment>
+        <Main />
         <Bottom />
       </React.Fragment>
     );
@@ -30,4 +35,14 @@ const styles = (theme: Theme): StyleRules => ({
   },
 });
 
-export default withStyles(styles)(Chat);
+const mapStateToProps = (state: StateProps) => ({
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>) => ({
+  actions: bindActionCreators(ChatActions, dispatch),
+});
+
+export default connect<StateProps, DispatchProps, void>(
+  mapStateToProps,
+  mapDispatchToProps,
+)(withStyles(styles)(Chat));

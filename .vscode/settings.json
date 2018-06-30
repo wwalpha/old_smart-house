@@ -11,7 +11,7 @@
     "**/.hg": true,
     "**/CVS": true,
     "**/.DS_Store": true,
-    //   "**/.*ignore": true,
+    "**/.*ignore": true,
     "**/*.lock": true,
     // "**/.vscode": true,
     //   "**/hooks": true,

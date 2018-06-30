@@ -1,10 +1,8 @@
 {
-  "eslint.enable": true,
-  "eslint.run": "onSave",
-  "eslint.autoFixOnSave": true,
-  "eslint.workingDirectories": [
-    "src"
-  ],
+  "tslint.autoFixOnSave": true,
+  "tslint.enable": true,
+  "tslint.run": "onSave",
+  "tslint.jsEnable": true,
   "files.exclude": {
     "**/.git": true,
     "**/.svn": true,

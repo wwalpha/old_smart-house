@@ -34,6 +34,8 @@ class App extends React.Component<Props, {}> {
     const { classes } = this.props;
     const { micClicked } = this.state;
 
+    console.log(classes);
+    console.log('micclick', micClicked);
     return (
       <React.Fragment>
         <Button

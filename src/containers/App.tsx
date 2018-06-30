@@ -39,7 +39,9 @@ class App extends React.Component<Props, {}> {
         <Button
           variant="fab"
           color="primary"
-          className={micClicked ? classes.clicked : classes.button}
+          classes={{
+            root: micClicked ? classes.clicked : classes.button,
+          }}
           onClick={this.handleStart}
         >
           <MicIcon />

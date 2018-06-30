@@ -6,17 +6,27 @@ import App from 'src/containers/App';
 
 const start = () => {
   render(
-    <App />,
-    document.getElementById('root'),
-  );
+       <App />,
+       document.getElementById('root'),
+   );
 };
 
-const onDeviceReady = () => {
-  start();
+const app = {
+    // Application Constructor
+  initialize: (): void => {
+    document.addEventListener('deviceready', this.deviceReady.bind(this), false);
+  },
+
+  // Update DOM on a Received Event
+  deviceReady: (id: string) => {
+    start();
+  },
 };
 
 if (process.env.MOBILE) {
-  document.addEventListener('deviceready', onDeviceReady, false);
+  app.initialize();
 } else {
+
+  console.log(device);
   start();
 }

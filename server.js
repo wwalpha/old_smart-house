@@ -9,7 +9,6 @@ const webpackConfig = require('./webpack/webpack.dev');
 const compiler = webpack(webpackConfig);
 const app = express();
 
-app.use(express.static('cordova/www'));
 app.use(dev(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
 app.use(hot(compiler));
 

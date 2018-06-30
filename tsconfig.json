@@ -25,6 +25,21 @@
     "paths": {
       "src/*": [
         "./src/*"
+      ],
+      "utils/*": [
+        "./src/utils/*"
+      ],
+      "actions": [
+        "./src/actions/index"
+      ],
+      "components/*": [
+        "./src/components/*"
+      ],
+      "models": [
+        "./src/models/index"
+      ],
+      "ActionTypes": [
+        "./src/constants/ActionTypes"
       ]
     }
   },

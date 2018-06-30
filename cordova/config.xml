@@ -33,4 +33,5 @@
         <variable name="KEEP_AVAUDIOSESSION_ALWAYS_ACTIVE" value="NO" />
     </plugin>
     <engine name="ios" spec="^4.5.4" />
+    <plugin name="cordova-plugin-device" spec="^2.0.2" />
 </widget>

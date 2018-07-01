@@ -1,11 +1,12 @@
 import * as React from 'react';
 import { Dispatch, bindActionCreators } from 'redux';
-import { connect, MapStateToPropsParam } from 'react-redux';
+import { connect } from 'react-redux';
 import { withStyles, StyleRules, Theme } from '@material-ui/core/styles';
-import { Props, DispatchProps, StateProps } from './Chat.d';
+import { Props, DispatchProps, StateFromProps } from './Chat.d';
 import Bottom from 'components/chat/Bottom';
 import Main from 'components/chat/Main';
 import { ChatActions } from 'actions/index';
+import { IState } from 'src/store/index.d';
 
 class Chat extends React.Component<Props, {}> {
 
@@ -37,15 +38,15 @@ const styles = (theme: Theme): StyleRules => ({
   },
 });
 
-const mapStateToProps = (state: StateProps): MapStateToPropsParam<StateProps, void, any> => ({
-
+const mapStateToProps = (state: IState) => ({
+  chat: state.get('chat').toJS(),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<DispatchProps>) => ({
   actions: bindActionCreators(ChatActions, dispatch),
 });
 
-export default connect<StateProps, DispatchProps, void>(
+export default connect<StateFromProps, DispatchProps, void>(
   mapStateToProps,
   mapDispatchToProps,
 )(withStyles(styles)(Chat));

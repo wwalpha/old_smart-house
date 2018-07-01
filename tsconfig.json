@@ -35,8 +35,8 @@
       "components/*": [
         "./src/components/*"
       ],
-      "models": [
-        "./src/models/index"
+      "models/*": [
+        "./src/models/*"
       ],
       "ActionTypes": [
         "./src/constants/ActionTypes"

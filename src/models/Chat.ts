@@ -1,16 +1,5 @@
 import { Record } from 'immutable';
-
-export interface Props extends Object {
-  media: Media[];
-}
-
-export interface State extends Record<Props> {
-  add: (payload: Payload) => State;
-}
-
-export interface Payload {
-  media: Media;
-}
+import { Props, Payload } from './Chat.d';
 
 export class ChatCLass extends Record<Props>({
   media: [],

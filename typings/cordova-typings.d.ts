@@ -1,2 +1,2 @@
 
-/// <reference path="..\.vscode\typings\cordova\cordova.d.ts"/>
+/// <reference path="..\cordova\.vscode\typings\cordova\cordova.d.ts"/>

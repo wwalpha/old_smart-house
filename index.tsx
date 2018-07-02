@@ -9,6 +9,7 @@ import App from 'src/containers/App';
 const history = createBrowserHistory();
 const store = createstore(history);
 
+console.log(device);
 const start = () => {
   render(
     <Provider store={store}>

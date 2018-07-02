@@ -1,6 +1,6 @@
 import { Record, List } from 'immutable';
 import { Props } from './Chat.d';
-import { Storage } from 'utils/firebase';
+import { S3 } from 'utils/aws';
 
 export class ChatCLass extends Record<Props>({
   media: List<Media>(),
@@ -8,8 +8,8 @@ export class ChatCLass extends Record<Props>({
 
   async add(media: Media) {
     console.log(111);
-    await Storage.push('1111', media);
-    console.log(2222);
+    // await S3.put('ttt', '444');
+    console.log(media);
 
     return this.set('media', this.media.push(media));
   }

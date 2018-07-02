@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",
+    "xcode": "open -a Xcode platforms/ios",
     "mobile": "cross-env MOBILE=true webpack -w --config ./webpack/webpack.mobile.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

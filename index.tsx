@@ -1,13 +1,19 @@
 import * as React from 'react';
-// import { Provider } from 'react-redux';
+import { Provider } from 'react-redux';
 import { render } from 'react-dom';
+import { createBrowserHistory } from 'history';
 import { isMobile } from 'react-device-detect';
-// import store from 'src/store';
+import createstore from 'src/store';
 import App from 'src/containers/App';
+
+const history = createBrowserHistory();
+const store = createstore(history);
 
 const start = () => {
   render(
-    <App />,
+    <Provider store={store}>
+      <App />
+    </Provider>,
     document.getElementById('root'),
   );
 };

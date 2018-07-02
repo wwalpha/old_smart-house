@@ -49,7 +49,6 @@
     "index.tsx",
   ],
   "files": [
-    "./typings/global.d.ts",
     "./typings/types.d.ts",
     "./typings/external.d.ts"
   ],

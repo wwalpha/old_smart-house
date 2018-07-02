@@ -18,18 +18,27 @@ class Bottom extends React.Component<Props, {}> {
   handleRecord = () => {
     const { saveRecordFile } = this.props;
     const { isRecording, media } = this.state;
-    if (isMobile) {
-      this.setState({ isRecording: !isRecording });
-      return;
-    }
+
+    this.setState({ isRecording: !isRecording });
+
     if (isRecording) {
-      if (media && saveRecordFile) {
+      if (!isMobile) {
+        saveRecordFile('1111');
+        return;
+      }
+
+      if (media) {
         media.stopRecord();
 
         console.log(media);
         saveRecordFile(media);
       }
     } else {
+
+      if (!isMobile) {
+        return;
+      }
+
       const filename = `${getTimeStamp()}.wav`;
       const media = new Media(filename, () => { });
 
@@ -37,10 +46,7 @@ class Bottom extends React.Component<Props, {}> {
       // start recording
       media.startRecord();
 
-      this.setState({
-        isRecording: !isRecording,
-        media,
-      });
+      this.setState({ media });
     }
   }
 
@@ -55,44 +61,26 @@ class Bottom extends React.Component<Props, {}> {
     const { isRecording } = this.state;
 
     return (
-      <div style={{ height: '100vh' }}>
-        <Button
-          variant="contained"
-          size="large"
-          color="primary"
-          onClick={this.handlePlay}
-          disableRipple
-          disableFocusRipple
-          fullWidth
-          classes={{ root: classes.play }}
-        >
-          再生
-        </Button>
-        <Button
-          variant="contained"
-          size="large"
-          color="primary"
-          classes={{
-            root: classes.root,
-            contained: !isRecording ? classes.mic : classes.recording,
-          }}
-          onClick={this.handleRecord}
-          disableRipple
-          disableFocusRipple
-          fullWidth
-        >
-          <MicIcon />
-        </Button>
-      </div>
+      <Button
+        variant="contained"
+        size="large"
+        color="primary"
+        classes={{
+          root: classes.root,
+          contained: !isRecording ? classes.mic : classes.recording,
+        }}
+        onClick={this.handleRecord}
+        disableRipple
+        disableFocusRipple
+        fullWidth
+      >
+        <MicIcon />
+      </Button>
     );
   }
 }
 
 const styles = (theme: Theme): StyleRules => ({
-  root: {
-    bottom: 0,
-    position: 'absolute',
-  },
   play: {
     top: 0,
     position: 'fixed',

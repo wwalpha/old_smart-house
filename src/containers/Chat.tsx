@@ -10,13 +10,13 @@ import { Props, DispatchToProps, StateToProps, Actions, Store } from './Chat.d';
 class Chat extends React.Component<Props, {}> {
 
   render() {
-    const { actions } = this.props;
+    const { actions, media } = this.props;
 
     return (
       <React.Fragment>
-        <Main />
+        <Main media={media} />
         <Bottom
-        // saveRecordFile={actions.saveRecordFile}
+          saveRecordFile={actions.saveRecordFile}
         />
       </React.Fragment>
     );

@@ -1,13 +1,11 @@
-import { Record } from 'immutable';
+import { Record, List } from 'immutable';
 import { Props, Payload } from './Chat.d';
 
 export class ChatCLass extends Record<Props>({
-  media: [],
+  media: List<Media>(),
 }) {
 
-  add(payload: Payload) {
-    return this.media.push(payload.media);
+  add(media: Media) {
+    return this.set('media', this.media.push(media));
   }
 }
-
-export const initialState: any = new ChatCLass();

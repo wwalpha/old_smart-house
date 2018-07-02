@@ -19,6 +19,7 @@ module.exports = {
       fb: path.resolve(__dirname, '../src/firebase/'),
       utils: path.resolve(__dirname, '../src/utils/'),
       components: path.resolve(__dirname, '../src/components/'),
+      actions: path.resolve(__dirname, '../src/actions/'),
       models: path.resolve(__dirname, '../src/models/'),
       ActionTypes: path.resolve(__dirname, '../src/constants/ActionTypes'),
     },

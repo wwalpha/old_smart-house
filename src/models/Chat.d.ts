@@ -12,6 +12,6 @@ export interface Payload {
   media: Media;
 }
 
-export interface Chat extends Props, State {
+export interface Store extends Props, State {
   get<K extends keyof Props>(key: K): Props[K];
 }

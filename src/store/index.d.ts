@@ -1,10 +1,10 @@
 import { Map, Record } from 'immutable';
 import { Chat } from '../models/index.d';
 
-export interface State {
-  chat: Chat.State,
+interface IStore {
+  chat: Chat.Store,
 }
 
-export interface IState extends Map<keyof State, Record<any>> {
-  get<K extends keyof State>(key: K): State[K];
+export interface Store extends Map<keyof IStore, Record<any>> {
+  get<K extends keyof IStore>(key: K): IStore[K];
 }

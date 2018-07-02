@@ -1,16 +1,17 @@
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
-import { ActionCreatorsMapObject } from "redux";
-import { ChatActions } from 'actions/index.d';
-import { Chat } from 'models/index.d';
-import { MapStateToProps } from "react-redux";
+import { ActionCreatorsMapObject, ActionCreator } from "redux";
+import * as Chat from 'actions/chat.d';
+export * from 'src/store/index.d';
 
-
-export interface Props extends WithStyles<StyleRules> {
-  actions: ChatActions,
+export interface StateToProps {
+  media: Media[],
 }
 
-export interface StateFromProps extends Chat.Props {
+export interface DispatchToProps {
+  actions: Chat.Actions,
 }
 
-export interface DispatchProps {
+export type Actions = Chat.Actions;
+
+export interface Props extends StateToProps, DispatchToProps, WithStyles<StyleRules> {
 }

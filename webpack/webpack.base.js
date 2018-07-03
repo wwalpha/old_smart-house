@@ -16,7 +16,6 @@ module.exports = {
     extensions: ['.ts', '.tsx', '.js'],
     alias: {
       src: path.resolve(__dirname, '../src/'),
-      fb: path.resolve(__dirname, '../src/firebase/'),
       utils: path.resolve(__dirname, '../src/utils/'),
       components: path.resolve(__dirname, '../src/components/'),
       actions: path.resolve(__dirname, '../src/actions/'),

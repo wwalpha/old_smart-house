@@ -47,3 +47,5 @@ declare module 'connected-react-router/immutable' {
 }
 
 declare module 'redux-api-middleware';
+
+declare var cordova: Cordova;

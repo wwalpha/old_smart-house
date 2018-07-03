@@ -38,7 +38,7 @@ const styles = (theme: Theme): StyleRules => ({
 });
 
 const mapStateToProps = (state: Store) => ({
-  media: state.get('chat').media,
+  media: state.get('chat').media.toJS(),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({

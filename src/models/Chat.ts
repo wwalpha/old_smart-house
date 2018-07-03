@@ -6,7 +6,7 @@ export class ChatCLass extends Record<Props>({
   media: List<Media>(),
 }) {
 
-  async add(media: Media) {
+  add(media: Media) {
     console.log(111);
     // await S3.put('ttt', '444');
     console.log(media);

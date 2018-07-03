@@ -2,8 +2,7 @@ import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
-import { isMobile, isBrowser } from 'react-device-detect';
-import { getTimeStamp } from 'utils/system';
+import { getTimeStamp, isMobile } from 'utils/system';
 import { Props, State } from './Bottom.d';
 
 class Bottom extends React.Component<Props, {}> {
@@ -81,6 +80,9 @@ class Bottom extends React.Component<Props, {}> {
 }
 
 const styles = (theme: Theme): StyleRules => ({
+  root: {
+    transition: 'unset',
+  },
   play: {
     top: 0,
     position: 'fixed',

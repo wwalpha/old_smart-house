@@ -5,10 +5,19 @@ import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import { Props } from './AudioPlay.d';
 
-class AudioPlay extends React.Component<Props, any> {
+class AudioPlay extends React.PureComponent<Props, any> {
+  state = {
+    playing: false,
+  };
 
-  shouldComponentUpdate(nextProps: Readonly<Props>, nextState: Readonly<any>) {
-    return this.props.media !== nextProps.media;
+  playsound = (media: Media) => new Promise((resolve) => {
+    media.play();
+  })
+
+  handlePlay = () => {
+    this.setState({ playing: true });
+
+    this.playsound(this.props.media).then(() => this.setState({ playing: false }));
   }
 
   render() {
@@ -19,8 +28,10 @@ class AudioPlay extends React.Component<Props, any> {
         <Button
           variant="contained"
           classes={{ root: classes.button, contained: classes.contained }}
+          disabled={this.state.playing}
           disableRipple
           disableFocusRipple
+          onClick={this.handlePlay}
         >
           <MicIcon />
         </Button>
@@ -38,7 +49,7 @@ const styles = (theme: Theme): StyleRules => {
     },
     button: {
       maxWidth: '200px',
-      minWidth: '200px',
+      minWidth: '150px',
       color: theme.palette.common.white,
       backgroundColor: green['200'],
     },

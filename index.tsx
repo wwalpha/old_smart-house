@@ -2,14 +2,13 @@ import * as React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
 import { createBrowserHistory } from 'history';
-import { isMobile } from 'react-device-detect';
 import createstore from 'src/store';
 import App from 'src/containers/App';
+import { isMobile } from 'utils/system';
 
 const history = createBrowserHistory();
 const store = createstore(history);
 
-console.log(device);
 const start = () => {
   render(
     <Provider store={store}>
@@ -31,9 +30,10 @@ const app = {
   },
 };
 
+console.log(isMobile);
 if (isMobile) {
-  // app.initialize();
-  start();
+  app.initialize();
+  // start();
 } else {
   start();
 }

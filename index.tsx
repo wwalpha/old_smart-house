@@ -8,6 +8,7 @@ import { isMobile } from 'utils/system';
 
 const history = createBrowserHistory();
 const store = createstore(history);
+
 const start = () => {
   render(
     <Provider store={store}>

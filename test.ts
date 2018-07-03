@@ -24,20 +24,35 @@
 //   Storage.put('server.js', toArrayBuffer(data)).catch(error => console.log(error));
 // });
 
-import * as S3 from 'aws-sdk/clients/s3';
-import { AWSError } from 'aws-sdk/lib/error';
+// import * as S3 from 'aws-sdk/clients/s3';
+// import { AWSError } from 'aws-sdk/lib/error';
+import { firebaseDb } from './src/utils/firebase/firebase';
 
-const s3 = new S3();
-const params: S3.PutObjectRequest = {
-  Bucket: 'iot-home-chat',
-  Key: 'server.js',
-};
+const ref = firebaseDb.ref('messages');
 
-import * as fs from 'fs';
-params.Body = fs.readFileSync('./server.js');
+// ref.
+//   ref.on('child_added', (snapshot: firebase.database.DataSnapshot) => {
+//     console.log('child_added', snapshot.val());
+//   });
 
-s3.putObject(params, (err: AWSError, data: S3.PutObjectOutput) => {
-  console.log(err);
+// ref.on('child_changed', (snapshot: firebase.database.DataSnapshot) => {
+//   console.log('child_changed', snapshot);
+// });
 
-  console.log(data);
+// ref.on('child_moved', (snapshot: firebase.database.DataSnapshot) => {
+//   console.log('child_moved', snapshot);
+// });
+
+// ref.on('child_removed', (snapshot: firebase.database.DataSnapshot) => {
+//   console.log('child_removed', snapshot);
+// });
+
+// ref.on('value', (snapshot: firebase.database.DataSnapshot) => {
+//   console.log(snapshot.val());
+// });
+import * as moment from 'moment';
+ref.orderByChild('timestamp').startAt(moment().utc().format()).on('child_added', (snapshot: firebase.database.DataSnapshot) => {
+  console.log(snapshot.val());
 });
+
+console.log('start');

@@ -5,7 +5,7 @@ import * as Chat from 'actions/chat.d';
 export * from 'src/store/index.d';
 
 export interface StateToProps {
-  media: List<Media>,
+  media: Media[],
 }
 
 export interface DispatchToProps {

@@ -2,8 +2,12 @@ import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
-import { getTimeStamp, isMobile } from 'utils/system';
+import { getTimeStamp } from 'utils/system';
 import { Props, State } from './Bottom.d';
+import { getDir } from 'utils/FileSystem';
+import { S3Utils, Config } from 'utils/aws';
+import { firebaseDb } from 'utils/firebase/firebase';
+import { S3 } from 'aws-sdk';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
@@ -21,38 +25,51 @@ class Bottom extends React.Component<Props, {}> {
     this.setState({ isRecording: !isRecording });
 
     if (isRecording) {
-      if (!isMobile) {
-        saveRecordFile('1111');
-        return;
-      }
-
       if (media) {
-        media.stopRecord();
+        media.file.stopRecord();
 
-        console.log(media);
-        saveRecordFile(media);
+        S3Utils.putObject(media.fullpath, media.filename)
+          .then((value: S3.PutObjectOutput) => {
+            console.log('s3', value);
+            const awsPath = `${Config.S3_URL}/messages/${media.filename}`;
+
+            console.log(awsPath);
+            const params = {
+              timestamp: getTimeStamp(),
+              wav: awsPath,
+            };
+
+            firebaseDb.ref('messages').push(params, (error: Error) => {
+              saveRecordFile(media);
+            });
+          });
       }
     } else {
+      // フォルダ存在チェック
+      getDir(cordova.file.documentsDirectory, 'alpha.iot.homechat')
+        .then(() => {
+          const filename = `${getTimeStamp()}.wav`;
+          const fullpath = `${cordova.file.documentsDirectory}alpha.iot.homechat/${filename}`;
+          const media = new Media(filename, () => { });
 
-      if (!isMobile) {
-        return;
-      }
+          // start recording
+          media.startRecord();
 
-      const filename = `${getTimeStamp()}.wav`;
-      const media = new Media(filename, () => { });
-
-      console.log(media);
-      // start recording
-      media.startRecord();
-
-      this.setState({ media });
+          this.setState({
+            media: {
+              filename,
+              fullpath,
+              file: media,
+            },
+          });
+        });
     }
   }
 
   handlePlay = () => {
     const { media } = this.state;
 
-    if (media) media.play();
+    if (media) media.file.play();
   }
 
   render() {

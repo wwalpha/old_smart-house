@@ -7,6 +7,7 @@ const mobile = {
   devtool: 'cheap-module-eval-source-map',
   output: {
     path: path.resolve(__dirname, '../cordova/platforms/ios/www'),
+    // path: path.resolve(__dirname, '../cordova/www'),
     publicPath: '',
   },
 };

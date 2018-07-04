@@ -6,6 +6,7 @@ import Bottom from 'components/chat/Bottom';
 import Main from 'components/chat/Main';
 import * as ChatActions from 'actions/chat';
 import { Props, DispatchToProps, StateToProps, Actions, Store } from './Chat.d';
+import Browser from '../components/filebrowser/Browser';
 
 class Chat extends React.Component<Props, {}> {
 
@@ -14,7 +15,8 @@ class Chat extends React.Component<Props, {}> {
 
     return (
       <React.Fragment>
-        <Main media={media} />
+        <Browser />
+        <Main />
         <Bottom
           saveRecordFile={actions.saveRecordFile}
         />

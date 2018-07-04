@@ -4,8 +4,14 @@ export interface Props extends WithStyles<StyleRules> {
   saveRecordFile: (media: any) => void,
 }
 
+export interface MediaProps {
+  filename: string,
+  fullpath: string,
+  file: Media,
+}
+
 export interface State {
-  media?: Media,
+  media?: MediaProps,
   value?: string,
   isRecording: boolean,
 }

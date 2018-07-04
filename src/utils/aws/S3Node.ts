@@ -1,6 +1,6 @@
 import { S3, AWSError } from 'aws-sdk';
-import * as fs from 'fs';
 import Config from './config';
+import * as fs from 'fs';
 
 export const putObject = (localpath: string, bucketPath: string): Promise<S3.PutObjectOutput> => new Promise((resolve, reject) => {
   const s3 = new S3();

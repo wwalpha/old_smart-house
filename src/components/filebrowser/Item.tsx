@@ -22,6 +22,7 @@ class Item extends React.Component<Props, {}> {
 
     const dirList = await FileUtils.dirList(path);
 
+    console.log('dirList', dirList);
     this.setState({
       open: !open,
       childList: dirList,
@@ -32,8 +33,8 @@ class Item extends React.Component<Props, {}> {
     const { directory = false, label } = this.props;
     const { open, childList } = this.state;
 
-    const children = () => childList.map((child: Entry) => (
-      <ItemChild path={child.fullPath} directory={child.isDirectory} label={child.name} />
+    const children: any = childList.map((child: Entry) => (
+      <ItemChild path={child.nativeURL} directory={child.isDirectory} label={child.name} />
     ));
 
     return (

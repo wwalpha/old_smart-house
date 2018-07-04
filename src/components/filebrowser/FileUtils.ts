@@ -1,10 +1,10 @@
 
-const resolveLocalFileURL = (path: string): Promise<Entry> => new Promise((resolve, reject) => {
+export const resolveLocalFileURL = (path: string): Promise<Entry> => new Promise((resolve, reject) => {
   window.resolveLocalFileSystemURL(path, (entry: Entry) => resolve(entry), (error: FileError) => reject(error),
   );
 });
 
-const dirEntries = (reader: DirectoryReader): Promise<Entry[]> => new Promise((resolve, reject) => {
+export const dirEntries = (reader: DirectoryReader): Promise<Entry[]> => new Promise((resolve, reject) => {
   reader.readEntries((entries: Entry[]) => resolve(entries), (error: FileError) => reject(error));
 });
 

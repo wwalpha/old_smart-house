@@ -1,5 +1,7 @@
-import * as S3 from './s3';
+import * as S3Utils from './s3';
+import Config from './config';
 
 export {
-  S3,
+  S3Utils,
+  Config,
 };

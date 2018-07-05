@@ -48,7 +48,9 @@ export const login = async () => {
   const password: string = device.uuid;
 
   try {
+    console.log('start signin');
     await Auth.signIn(username, password);
+    console.log('start finish');
   } catch (error) {
     console.log(error);
     try {
@@ -63,6 +65,7 @@ export const login = async () => {
   }
 
   try {
+    console.log('start auth');
     return await auth();
   } catch (errorSignUp) {
     console.log(errorSignUp);

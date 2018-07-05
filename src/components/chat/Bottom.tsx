@@ -2,12 +2,12 @@ import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
+import { Storage } from 'aws-amplify';
 import { getTimeStamp } from 'utils/system';
 import { Props, State } from './Bottom.d';
-import { getDir } from 'utils/FileSystem';
 import { S3Utils, Config } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase/firebase';
-import { S3 } from 'aws-sdk';
+import { readFile } from 'utils/FileSystem';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
@@ -28,41 +28,38 @@ class Bottom extends React.Component<Props, {}> {
       if (media) {
         media.file.stopRecord();
 
-        S3Utils.putObject(media.fullpath, media.filename)
-          .then((value: S3.PutObjectOutput) => {
-            console.log('s3', value);
-            const awsPath = `${Config.S3_URL}/messages/${media.filename}`;
+        const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
 
-            console.log(awsPath);
-            const params = {
-              timestamp: getTimeStamp(),
-              wav: awsPath,
-            };
+        readFile(fullpath).then((value: any) => {
+          console.log('file', value);
+          Storage.put('test.wav', value);
 
-            firebaseDb.ref('messages').push(params, (error: Error) => {
-              saveRecordFile(media);
-            });
+          const awsPath = `${Config.S3_URL}/${Config.bucket}/${media.filename}`;
+
+          //  console.log('awsPath', awsPath);
+          const params = {
+            timestamp: getTimeStamp(),
+            wav: awsPath,
+          };
+
+          firebaseDb.ref('messages').push(params, (error: Error) => {
+            saveRecordFile(media);
           });
+        }).catch((err: any) => console.log(err));
       }
     } else {
-      // フォルダ存在チェック
-      getDir(cordova.file.documentsDirectory, 'alpha.iot.homechat')
-        .then(() => {
-          const filename = `${getTimeStamp()}.wav`;
-          const fullpath = `${cordova.file.documentsDirectory}alpha.iot.homechat/${filename}`;
-          const media = new Media(filename, () => { });
+      const filename = `${getTimeStamp()}.wav`;
+      const media = new Media(filename, () => { });
 
-          // start recording
-          media.startRecord();
+      // start recording
+      media.startRecord();
 
-          this.setState({
-            media: {
-              filename,
-              fullpath,
-              file: media,
-            },
-          });
-        });
+      this.setState({
+        media: {
+          filename,
+          file: media,
+        },
+      });
     }
   }
 

@@ -1,0 +1,38 @@
+import { S3, AWSError } from 'aws-sdk';
+import Config from './config';
+
+export const getObject = (filepath: string): Promise<S3.PutObjectOutput> => new Promise((resolve, reject) => {
+  const s3 = new S3();
+
+  const params: S3.GetObjectRequest = {
+    Bucket: Config.bucket,
+    Key: filepath,
+  };
+
+  s3.getObject(params, (error: AWSError, data: S3.GetObjectOutput) => {
+    if (error) {
+      reject(error);
+      return;
+    }
+
+    resolve(data);
+  });
+});
+
+// max 1000
+export const dirList = (): Promise<S3.ListObjectsOutput> => new Promise((resolve, reject) => {
+  const s3 = new S3();
+
+  const params: S3.ListObjectsRequest = {
+    Bucket: Config.bucket,
+  };
+
+  s3.listObjects(params, (error: AWSError, data: S3.ListObjectsOutput) => {
+    if (error) {
+      reject(error);
+      return;
+    }
+
+    resolve(data);
+  });
+});

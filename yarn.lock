@@ -725,6 +725,10 @@
   version "10.1.2"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.1.2.tgz#1b928a0baa408fc8ae3ac012cc81375addc147c6"
 
+"@types/paho-mqtt@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@types/paho-mqtt/-/paho-mqtt-1.0.3.tgz#2eda0886584e1e69551f5203934878c326fe3566"
+
 "@types/react-dom@^16.0.6":
   version "16.0.6"
   resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.0.6.tgz#f1a65a4e7be8ed5d123f8b3b9eacc913e35a1a3c"
@@ -793,6 +797,10 @@
 "@types/webpack-env@^1.13.6":
   version "1.13.6"
   resolved "https://registry.yarnpkg.com/@types/webpack-env/-/webpack-env-1.13.6.tgz#128d1685a7c34d31ed17010fc87d6a12c1de6976"
+
+"@types/zen-observable@^0.5.3":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.5.4.tgz#b863a4191e525206819e008097ebf0fb2e3a1cdc"
 
 "@webassemblyjs/ast@1.5.12":
   version "1.5.12"
@@ -994,6 +1002,20 @@ aliasify@^2.1.0:
   dependencies:
     browserify-transform-tools "~1.7.0"
 
+amazon-cognito-auth-js@^1.1.9:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-auth-js/-/amazon-cognito-auth-js-1.2.3.tgz#98f72b02f45357ef718e329c764c2fba4a2f1206"
+  dependencies:
+    js-cookie "^2.1.4"
+
+amazon-cognito-identity-js@^2.0.13:
+  version "2.0.13"
+  resolved "https://registry.yarnpkg.com/amazon-cognito-identity-js/-/amazon-cognito-identity-js-2.0.13.tgz#47afd2fb4d5de56bc1c9a842bc5727003a16802a"
+  dependencies:
+    buffer "4.9.1"
+    crypto-browserify "1.0.9"
+    js-cookie "^2.1.4"
+
 ansi-escapes@^1.1.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/ansi-escapes/-/ansi-escapes-1.4.0.tgz#d3a8a83b319aa67793662b13e761c7911422306e"
@@ -1155,19 +1177,35 @@ atob@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.1.tgz#ae2d5a729477f289d60dd7f96a6314a22dd6c22a"
 
-aws-sdk@^2.266.1:
-  version "2.268.1"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.268.1.tgz#d4a2152d7d34c52b6d1c7a4809a2672db7f2996a"
+aws-amplify@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/aws-amplify/-/aws-amplify-0.4.8.tgz#82b9028d80fa83597c25eaaeadbfcc3761d4d967"
+  dependencies:
+    "@types/paho-mqtt" "^1.0.3"
+    "@types/zen-observable" "^0.5.3"
+    amazon-cognito-auth-js "^1.1.9"
+    amazon-cognito-identity-js "^2.0.13"
+    aws-sdk "2.198.0"
+    axios "^0.17.0"
+    graphql "0.11.7"
+    paho-mqtt "^1.0.4"
+    url "^0.11.0"
+    uuid "^3.2.1"
+    zen-observable "^0.8.6"
+
+aws-sdk@2.198.0:
+  version "2.198.0"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.198.0.tgz#2245311337ddc844cc34c13f3fcf3b7ea843f434"
   dependencies:
     buffer "4.9.1"
-    events "1.1.1"
-    ieee754 "1.1.8"
+    events "^1.1.1"
     jmespath "0.15.0"
     querystring "0.2.0"
     sax "1.2.1"
     url "0.10.3"
     uuid "3.1.0"
     xml2js "0.4.17"
+    xmlbuilder "4.2.1"
 
 aws-sign2@~0.6.0:
   version "0.6.0"
@@ -1180,6 +1218,13 @@ aws-sign2@~0.7.0:
 aws4@^1.2.1, aws4@^1.6.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.7.0.tgz#d4d0e9b9dbfca77bf08eeb0a8a471550fe39e289"
+
+axios@^0.17.0:
+  version "0.17.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.17.1.tgz#2d8e3e5d0bdbd7327f91bc814f5c57660f81824d"
+  dependencies:
+    follow-redirects "^1.2.5"
+    is-buffer "^1.1.5"
 
 babel-code-frame@^6.22.0:
   version "6.26.0"
@@ -2124,6 +2169,10 @@ cryptiles@2.x.x:
   dependencies:
     boom "2.x.x"
 
+crypto-browserify@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-1.0.9.tgz#cc5449685dfb85eb11c9828acc7cb87ab5bbfcc0"
+
 crypto-browserify@^3.0.0, crypto-browserify@^3.11.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/crypto-browserify/-/crypto-browserify-3.12.0.tgz#396cf9f3137f03e4b8e532c58f698254e00f80ec"
@@ -2578,7 +2627,7 @@ etag@~1.8.1:
   version "1.8.1"
   resolved "https://registry.yarnpkg.com/etag/-/etag-1.8.1.tgz#41ae2eeb65efa62268aebfea83ac7d79299b0887"
 
-events@1.1.1, events@^1.0.0, events@~1.1.0:
+events@^1.0.0, events@^1.1.1, events@~1.1.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
@@ -2809,6 +2858,12 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
+follow-redirects@^1.2.5:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.0.tgz#234f49cf770b7f35b40e790f636ceba0c3a0ab77"
+  dependencies:
+    debug "^3.1.0"
+
 for-in@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -3014,6 +3069,12 @@ got@^3.2.0:
 graceful-fs@^4.1.11, graceful-fs@^4.1.2:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.1.11.tgz#0e8bdfe4d1ddb8854d64e04ea7c00e2a026e5658"
+
+graphql@0.11.7:
+  version "0.11.7"
+  resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.11.7.tgz#e5abaa9cb7b7cccb84e9f0836bf4370d268750c6"
+  dependencies:
+    iterall "1.1.3"
 
 graphql@0.13.0:
   version "0.13.0"
@@ -3263,10 +3324,6 @@ iconv-lite@^0.4.22, iconv-lite@^0.4.4, iconv-lite@~0.4.13:
   resolved "https://registry.yarnpkg.com/iconv-lite/-/iconv-lite-0.4.23.tgz#297871f63be507adcfbfca715d0cd0eed84e9a63"
   dependencies:
     safer-buffer ">= 2.1.2 < 3"
-
-ieee754@1.1.8:
-  version "1.1.8"
-  resolved "https://registry.yarnpkg.com/ieee754/-/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
 
 ieee754@^1.1.11, ieee754@^1.1.4:
   version "1.1.12"
@@ -3676,6 +3733,10 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+iterall@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.3.tgz#1cbbff96204056dde6656e2ed2e2226d0e6d72c9"
+
 iterall@1.1.x:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/iterall/-/iterall-1.1.4.tgz#0db40d38fdcf53ae14dc8ec674e62ab190d52cfc"
@@ -3683,6 +3744,10 @@ iterall@1.1.x:
 jmespath@0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/jmespath/-/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
+
+js-cookie@^2.1.4:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/js-cookie/-/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
 
 js-levenshtein@^1.1.3:
   version "1.1.3"
@@ -4574,6 +4639,10 @@ package-json@^1.0.0:
   dependencies:
     got "^3.2.0"
     registry-url "^3.0.0"
+
+paho-mqtt@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/paho-mqtt/-/paho-mqtt-1.0.4.tgz#279822dd8ea00a961bf141f03d09c9f4339ebb79"
 
 pako@~0.2.0:
   version "0.2.9"
@@ -6369,7 +6438,7 @@ uuid@^2.0.1:
   version "2.0.3"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-2.0.3.tgz#67e2e863797215530dff318e5bf9dcebfd47b21a"
 
-uuid@^3.0.0, uuid@^3.1.0:
+uuid@^3.0.0, uuid@^3.1.0, uuid@^3.2.1:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
 
@@ -6630,15 +6699,15 @@ xmlbuilder@4.0.0:
   dependencies:
     lodash "^3.5.0"
 
-xmlbuilder@8.2.2:
-  version "8.2.2"
-  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-8.2.2.tgz#69248673410b4ba42e1a6136551d2922335aa773"
-
-xmlbuilder@^4.1.0:
+xmlbuilder@4.2.1, xmlbuilder@^4.1.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-4.2.1.tgz#aa58a3041a066f90eaa16c2f5389ff19f3f461a5"
   dependencies:
     lodash "^4.0.0"
+
+xmlbuilder@8.2.2:
+  version "8.2.2"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-8.2.2.tgz#69248673410b4ba42e1a6136551d2922335aa773"
 
 xmldom@0.1.x:
   version "0.1.27"
@@ -6702,3 +6771,7 @@ yargs@^3.10.0:
     string-width "^1.0.1"
     window-size "^0.1.4"
     y18n "^3.2.0"
+
+zen-observable@^0.8.6:
+  version "0.8.8"
+  resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.8.tgz#1ea93995bf098754a58215a1e0a7309e5749ec42"

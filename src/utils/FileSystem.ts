@@ -42,3 +42,25 @@ export const dirList = async (path: string): Promise<Entry[]> => {
 
   return await dirEntries(dirEntry.createReader());
 };
+
+const read = (entry: FileEntry): Promise<any> => new Promise((resolve, reject) => {
+  entry.file(
+    (file: File) => {
+      console.log('readfile');
+      const reader = new FileReader();
+      reader.onload = () => {
+        console.log('onload', reader);
+        resolve(reader.result);
+      };
+
+      reader.readAsArrayBuffer(file);
+    },
+    (err: FileError) => reject(err));
+});
+
+/** ローカルファイルを読取 */
+export const readFile = async (localpath: string) => {
+  const file: FileEntry = await resolveLocalFileURL(localpath) as FileEntry;
+
+  return await read(file);
+};

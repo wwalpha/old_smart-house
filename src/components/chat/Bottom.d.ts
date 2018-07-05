@@ -6,7 +6,6 @@ export interface Props extends WithStyles<StyleRules> {
 
 export interface MediaProps {
   filename: string,
-  fullpath: string,
   file: Media,
 }
 

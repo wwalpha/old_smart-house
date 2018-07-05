@@ -50,9 +50,28 @@ const ref = firebaseDb.ref('messages');
 // ref.on('value', (snapshot: firebase.database.DataSnapshot) => {
 //   console.log(snapshot.val());
 // });
-import * as moment from 'moment';
-ref.orderByChild('timestamp').startAt(moment().utc().format()).on('child_added', (snapshot: firebase.database.DataSnapshot) => {
-  console.log(snapshot.val());
-});
+// import * as moment from 'moment';
+// ref.orderByChild('timestamp').startAt(moment().utc().format()).on('child_added', (snapshot: firebase.database.DataSnapshot) => {
+//   console.log(snapshot.val());
+// });
 
-console.log('start');
+// console.log('start');
+import Amplify, { Auth } from 'aws-amplify';
+
+Amplify.configure({
+  Auth: {
+    region: 'ap-northeast-1',
+    userPoolId: 'ap-northeast-1_DlXJc0xUN',
+    userPoolWebClientId: '1vmq0hpdu9j9khkiq6l6adpvl2',
+  },
+});
+console.log('222');
+Auth.signUp({
+  username: 'abc12345678901',
+  password: 'mysecurerandompassword#123',
+})
+  .then((value) => {
+    console.log(1111);
+    console.log(value);
+  })
+  .catch(error => console.log(error));

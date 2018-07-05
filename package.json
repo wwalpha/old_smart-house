@@ -30,7 +30,7 @@
     "@types/redux-actions": "^2.3.0",
     "@types/redux-form": "^7.2.6",
     "@types/redux-immutable": "^3.0.38",
-    "aws-sdk": "^2.266.1",
+    "aws-amplify": "^0.4.8",
     "connected-react-router": "^4.3.0",
     "cordova": "^8.0.0",
     "cordova-ios": "^4.5.4",

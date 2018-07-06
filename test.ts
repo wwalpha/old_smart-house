@@ -74,3 +74,18 @@
 //     console.log(value);
 //   })
 //   .catch(error => console.log(error));
+import * as AWS from 'aws-sdk';
+import Config from './src/utils/aws/config';
+
+AWS.config.region = Config.Region;
+AWS.config.update({
+  region: Config.Region,
+  accessKeyId: Config.AccessKeyId,
+  secretAccessKey: Config.SecretAccessKey,
+});
+
+const s3 = new AWS.S3();
+const params = { Bucket: Config.bucket, Key: 'public/20180706151045169.wav' };
+s3.getSignedUrl('getObject', params, (err, url) => {
+  console.log('The URL is', url);
+});

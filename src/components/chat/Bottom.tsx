@@ -8,6 +8,15 @@ import { Props, State, MediaProps } from './Bottom.d';
 import { Config } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase/firebase';
 import { readFile } from 'utils/fileSystem';
+import { S3 } from 'aws-sdk';
+
+const getSignedUrl = (filename: string): Promise<string> => new Promise((resolve, reject) => {
+  const s3 = new S3();
+  const awsParams = { Bucket: Config.bucket, Key: `public/${filename}` };
+  s3.getSignedUrl('getObject', awsParams, (err, url) => {
+    err ? reject(err) : resolve(url);
+  });
+});
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
@@ -25,17 +34,19 @@ class Bottom extends React.Component<Props, {}> {
     const file: any = await readFile(fullpath);
     console.log('file', file);
 
-    const ret: Object = await Storage.put(media.filename, file);
+    const ret: Object = await Storage.put(media.filename, file, {
+      contentType: 'audio/wav',
+    });
 
     console.log('ret', ret);
 
-    const awsPath = `${Config.S3_URL}/${Config.bucket}/public/${media.filename}`;
+    // const awsPath = `${Config.S3_URL}/${Config.bucket}/private/${Config.Cognito.IdentityPoolId}/${media.filename}`;
 
-    //  console.log('awsPath', awsPath);
     const params = {
       timestamp: getTimeStamp(),
-      wav: awsPath,
+      wav: await getSignedUrl(media.filename),
     };
+    console.log('awsPath', params);
 
     return params;
   }

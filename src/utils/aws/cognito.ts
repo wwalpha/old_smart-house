@@ -27,9 +27,6 @@ const auth = (username: string, password: string): Promise<void> => new Promise(
       const accessToken = session.getAccessToken().getJwtToken();
       const idToken = session.getIdToken().getJwtToken();
 
-      // POTENTIAL: Region needs to be set if not already set previously elsewhere.
-      AWS.config.region = Config.Region;
-
       const pool: string = `cognito-idp.${Config.Region}.amazonaws.com/${UserPoolId}`;
       AWS.config.credentials = new AWS.CognitoIdentityCredentials({
         IdentityPoolId,

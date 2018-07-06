@@ -4,6 +4,7 @@ import { render } from 'react-dom';
 import { createBrowserHistory } from 'history';
 import createstore from 'src/store';
 import Amplify from 'aws-amplify';
+import * as AWS from 'aws-sdk';
 import App from 'src/containers/App';
 import { isIOS } from 'react-device-detect';
 import { Cognito, Config } from 'utils/aws';
@@ -20,6 +21,15 @@ const start = () => {
     document.getElementById('root'),
   );
 };
+
+(global as any).fetch = require('node-fetch');
+
+AWS.config.region = Config.Region;
+AWS.config.update({
+  region: Config.Region,
+  accessKeyId: Config.AccessKeyId,
+  secretAccessKey: Config.SecretAccessKey,
+});
 
 Amplify.configure({
   Auth: {

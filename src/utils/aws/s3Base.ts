@@ -36,3 +36,18 @@ export const dirList = (): Promise<S3.ListObjectsOutput> => new Promise((resolve
     resolve(data);
   });
 });
+
+const getSignedUrl = (type: string, params: any) => new Promise<any>((resolve, reject) => {
+  const s3 = new S3();
+
+  s3.getSignedUrl(type, params, (err, url) => {
+    if (err) {
+      reject(err);
+      return;
+    }
+
+    resolve(url);
+
+    console.log('The URL is', url);
+  });
+});

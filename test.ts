@@ -85,7 +85,7 @@ AWS.config.update({
 });
 
 const s3 = new AWS.S3();
-const params = { Bucket: Config.bucket, Key: 'public/20180706151045169.wav' };
+const params = { Bucket: Config.bucket, Key: 'public/20180706233116194.wav' };
 s3.getSignedUrl('getObject', params, (err, url) => {
   console.log('The URL is', url);
 });

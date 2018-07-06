@@ -8,12 +8,18 @@ import { Props, State, MediaProps } from './Bottom.d';
 import { Config } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase/firebase';
 import { readFile } from 'utils/fileSystem';
-import { S3 } from 'aws-sdk';
+import * as AWS from 'aws-sdk';
 
 const getSignedUrl = (filename: string): Promise<string> => new Promise((resolve, reject) => {
-  const s3 = new S3();
+  AWS.config.update({
+    region: Config.Region,
+    accessKeyId: Config.AccessKeyId,
+    secretAccessKey: Config.SecretAccessKey,
+  });
+  const s3 = new AWS.S3();
   const awsParams = { Bucket: Config.bucket, Key: `public/${filename}` };
-  s3.getSignedUrl('getObject', awsParams, (err, url) => {
+  s3.getSignedUrl('getObject', awsParams, (err: Error, url: string) => {
+    console.log(url);
     err ? reject(err) : resolve(url);
   });
 });

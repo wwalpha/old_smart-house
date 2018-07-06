@@ -1,27 +1,24 @@
-import Amplify, { Auth } from 'aws-amplify';
+import * as AWS from 'aws-sdk';
+import { Auth } from 'aws-amplify';
 import { CognitoUserPool, CognitoUser, AuthenticationDetails, CognitoUserSession } from 'amazon-cognito-identity-js';
 import Config from './config';
 
-Amplify.configure({
-  Auth: {
-    region: Config.region,
-    ...Config.pool,
-  },
-});
+/** 認証情報を取得する */
+const auth = (username: string, password: string): Promise<void> => new Promise((resolve, reject) => {
+  const { UserPoolId, IdentityPoolId, UserPoolWebClientId } = Config.Cognito;
 
-const auth = () => new Promise((resolve, reject) => {
   const authenticationDetails = new AuthenticationDetails({
-    Username: device.uuid,
-    Password: device.uuid,
+    Username: username,
+    Password: password,
   });
 
   const userPool = new CognitoUserPool({
-    ClientId: Config.pool.userPoolWebClientId,
-    UserPoolId: Config.pool.userPoolId,
+    ClientId: UserPoolWebClientId,
+    UserPoolId,
   });
 
   const cognitoUser = new CognitoUser({
-    Username: device.uuid,
+    Username: username,
     Pool: userPool,
   });
 
@@ -30,9 +27,24 @@ const auth = () => new Promise((resolve, reject) => {
       const accessToken = session.getAccessToken().getJwtToken();
       const idToken = session.getIdToken().getJwtToken();
 
-      resolve({
-        accessToken,
-        idToken,
+      // POTENTIAL: Region needs to be set if not already set previously elsewhere.
+      AWS.config.region = Config.Region;
+
+      const pool: string = `cognito-idp.${Config.Region}.amazonaws.com/${UserPoolId}`;
+      AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId,
+        Logins: {
+          // Change the key below according to the specific region your user pool is in.
+          [pool]: idToken,
+        },
+      });
+
+      (AWS.config.credentials as AWS.Credentials).refresh((err: AWS.AWSError) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve();
+        }
       });
     },
     onFailure: (err: any) => reject(err),
@@ -43,33 +55,18 @@ const auth = () => new Promise((resolve, reject) => {
  * ユーザー存在する場合、ユーザー情報を取得する
  * ユーザー存在しない場合、ユーザーを登録してからユーザー情報を取得する
  */
-export const login = async () => {
-  const username: string = device.uuid;
-  const password: string = device.uuid;
-
+export const login = async (username: string, password: string) => {
   try {
-    console.log('start signin');
     await Auth.signIn(username, password);
-    console.log('start finish');
   } catch (error) {
     console.log(error);
-    try {
-      await Auth.signUp({
-        username,
-        password,
-      });
+    await Auth.signUp({
+      username,
+      password,
+    });
 
-    } catch (errorSignUp) {
-      console.log(errorSignUp);
-    }
+    await Auth.signIn(username, password);
   }
 
-  try {
-    console.log('start auth');
-    return await auth();
-  } catch (errorSignUp) {
-    console.log(errorSignUp);
-  }
-
-  return null;
+  return await auth(username, password);
 };

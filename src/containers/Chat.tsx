@@ -15,7 +15,7 @@ class Chat extends React.Component<Props, {}> {
 
     return (
       <React.Fragment>
-        <Browser />
+        {/* <Browser /> */}
         <Main />
         <Bottom
           saveRecordFile={actions.saveRecordFile}

@@ -23,22 +23,28 @@ const start = () => {
 
 Amplify.configure({
   Auth: {
-    region: Config.region,
-    userPoolId: Config.pool.userPoolId,
-    userPoolWebClientId: Config.pool.userPoolWebClientId,
+    region: Config.Region,
+    identityPoolId: Config.Cognito.IdentityPoolId,
+    userPoolId: Config.Cognito.UserPoolId,
+    userPoolWebClientId: Config.Cognito.UserPoolWebClientId,
   },
   Storage: {
-    region: Config.region,
+    region: Config.Region,
     bucket: Config.bucket,
-    identityPoolId: 'ap-northeast-1:00cc4b25-0d8e-4b64-a15f-ecb62f3d26f3',
+    IdentityPoolId: 'ap-northeast-1:00cc4b25-0d8e-4b64-a15f-ecb62f3d26f3',
   },
 });
+
+const username: string = 'test';
+const password: string = 'test1234567890';
 
 if (isIOS) {
   document.addEventListener(
     'deviceready',
-    () => Cognito.login().then(value => start()),
+    () => Cognito.login(username, password).then(() => start()),
     false);
 } else {
-  start();
+  Cognito.login(username, password).then(() => {
+    start();
+  }).catch(err => console.log(err));
 }

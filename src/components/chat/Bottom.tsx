@@ -7,7 +7,7 @@ import { getTimeStamp } from 'utils/system';
 import { Props, State } from './Bottom.d';
 import { S3Utils, Config } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase/firebase';
-import { readFile } from 'utils/FileSystem';
+import { readFile } from 'utils/fileSystem';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {

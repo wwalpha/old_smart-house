@@ -12,3 +12,5 @@ cordova/platforms/ios/www/index.html
 cordova/platforms/ios/www/bundle.js
 /cordova/platforms
 /cordova/plugins
+/src/utils/aws/config.ts
+/src/utils/firebase/config.ts

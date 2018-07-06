@@ -4,7 +4,7 @@ import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
 import { Storage } from 'aws-amplify';
 import { getTimeStamp } from 'utils/system';
-import { Props, State } from './Bottom.d';
+import { Props, State, MediaProps } from './Bottom.d';
 import { Config } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase/firebase';
 import { readFile } from 'utils/fileSystem';
@@ -18,6 +18,28 @@ class Bottom extends React.Component<Props, {}> {
 
   handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
 
+  upload = async (media: MediaProps) => {
+    const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
+
+    console.log('fullpath', fullpath);
+    const file: any = await readFile(fullpath);
+    console.log('file', file);
+
+    const ret: Object = await Storage.put(media.filename, file);
+
+    console.log('ret', ret);
+
+    const awsPath = `${Config.S3_URL}/${Config.bucket}/public/${media.filename}`;
+
+    //  console.log('awsPath', awsPath);
+    const params = {
+      timestamp: getTimeStamp(),
+      wav: awsPath,
+    };
+
+    return params;
+  }
+
   handleRecord = () => {
     const { saveRecordFile } = this.props;
     const { isRecording, media } = this.state;
@@ -28,25 +50,13 @@ class Bottom extends React.Component<Props, {}> {
       if (media) {
         media.file.stopRecord();
 
-        const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
-
-        readFile(fullpath).then((value: any) => {
-          console.log('file', value);
-
-          Storage.put('test.wav', value);
-
-          const awsPath = `${Config.S3_URL}/${Config.bucket}/public/${media.filename}`;
-
-          //  console.log('awsPath', awsPath);
-          const params = {
-            timestamp: getTimeStamp(),
-            wav: awsPath,
-          };
-
+        this.upload(media).then((params) => {
+          console.log(params);
           firebaseDb.ref('messages').push(params, (error: Error) => {
+            if (error) console.error(error);
             saveRecordFile(media);
           });
-        }).catch((err: any) => console.log(err));
+        }).catch(error => console.log(error));
       }
     } else {
       const filename = `${getTimeStamp()}.wav`;

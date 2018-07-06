@@ -4,7 +4,7 @@ export type Cognito = {
   IdentityPoolId: string;
 };
 
-const accessKeyId = 'AKIAJUNYJGV2LA4FIAAQ';
+const accessKeyId = 'AKIAJUNYJGV2LA4FIAAA';
 const secretAccessKey = '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';
 const region: string = 'ap-northeast-1';
 const S3_URL: string = `https://s3-${region}.amazonaws.com`;

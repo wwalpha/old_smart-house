@@ -5,7 +5,7 @@ import MicIcon from '@material-ui/icons/Mic';
 import { Storage } from 'aws-amplify';
 import { getTimeStamp } from 'utils/system';
 import { Props, State } from './Bottom.d';
-import { S3Utils, Config } from 'utils/aws';
+import { Config } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase/firebase';
 import { readFile } from 'utils/fileSystem';
 
@@ -32,9 +32,10 @@ class Bottom extends React.Component<Props, {}> {
 
         readFile(fullpath).then((value: any) => {
           console.log('file', value);
+
           Storage.put('test.wav', value);
 
-          const awsPath = `${Config.S3_URL}/${Config.bucket}/${media.filename}`;
+          const awsPath = `${Config.S3_URL}/${Config.bucket}/public/${media.filename}`;
 
           //  console.log('awsPath', awsPath);
           const params = {

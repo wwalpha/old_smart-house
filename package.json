@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "node server.js",
     "mobile": "cross-env MOBILE=true webpack -w --config ./webpack/webpack.mobile.js",
+    "sim": "webpack -w --config ./webpack/webpack.sim.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

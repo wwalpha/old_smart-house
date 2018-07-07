@@ -36,6 +36,12 @@ const auth = (username: string, password: string): Promise<void> => new Promise(
         },
       });
 
+      AWS.config.region = Config.Region;
+      AWS.config.update({
+        region: Config.Region,
+        accessKeyId: Config.AccessKeyId,
+        secretAccessKey: Config.SecretAccessKey,
+      });
       (AWS.config.credentials as AWS.Credentials).refresh((err: AWS.AWSError) => {
         if (err) {
           reject(err);

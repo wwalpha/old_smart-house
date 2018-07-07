@@ -24,13 +24,6 @@ const start = () => {
 
 (global as any).fetch = require('node-fetch');
 
-AWS.config.region = Config.Region;
-AWS.config.update({
-  region: Config.Region,
-  accessKeyId: Config.AccessKeyId,
-  secretAccessKey: Config.SecretAccessKey,
-});
-
 Amplify.configure({
   Auth: {
     region: Config.Region,

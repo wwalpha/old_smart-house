@@ -1,11 +1,19 @@
 import * as React from 'react';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader';
-import Chat from 'src/containers/Chat';
 import { StyleRules, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import { Props } from './App.d';
+import * as AppActions from 'actions/app';
+
+import Chat from 'src/containers/Chat';
+import { Props, Actions, DispatchToProps } from './App.d';
 
 class App extends React.Component<Props, {}> {
+  // tslint:disable-next-line:function-name
+  UNSAFE_componentWillMount() {
+    console.log(this.props.credentials);
+  }
 
   render() {
     const { classes } = this.props;
@@ -29,4 +37,11 @@ const styles = (): StyleRules => ({
   },
 });
 
-export default hot(module)(withStyles(styles)(App));
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+  actions: bindActionCreators<Actions>(AppActions, dispatch),
+});
+
+export default connect<any, DispatchToProps, void>(
+  undefined,
+  mapDispatchToProps,
+)(hot(module)(withStyles(styles)(App)));

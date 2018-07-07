@@ -1,13 +1,8 @@
-import * as Firebase from 'firebase';
+import * as FirebaseApp from 'firebase/app';
+
 import FirebaseConfig from './config';
 
-import * as App from 'firebase/app';
-// import 'firebase/app';
-import 'firebase/storage';
-import 'firebase/database';
-
-export const firebaseApp = undefined;
-// export const firebaseApp = App.initializeApp(FirebaseConfig);
-export const firebaseAuth = Firebase.auth();
-export const firebaseDb = Firebase.database();
-export const storage = Firebase.storage();
+export const firebaseApp = FirebaseApp.initializeApp(FirebaseConfig);
+export const firebaseAuth = firebaseApp.auth();
+export const firebaseDb = firebaseApp.database();
+// export const storage = Firebase.storage();

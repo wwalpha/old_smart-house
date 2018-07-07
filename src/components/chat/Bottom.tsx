@@ -3,21 +3,24 @@ import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
 import { Storage } from 'aws-amplify';
-import { getTimeStamp } from 'utils/system';
-import { Props, State, MediaProps } from './Bottom.d';
 import { Config } from 'utils/aws';
-import { firebaseDb } from 'utils/firebase/firebase';
+import { firebaseDb } from 'utils/firebase';
 import { readFile } from 'utils/fileSystem';
+import { getTimeStamp } from 'utils/system';
 import * as AWS from 'aws-sdk';
+import { Chat } from 'models';
+import { Props, State } from './Bottom.d';
 
-const getSignedUrl = (filename: string): Promise<string> => new Promise((resolve, reject) => {
-  AWS.config.update({
-    region: Config.Region,
-    accessKeyId: Config.AccessKeyId,
-    secretAccessKey: Config.SecretAccessKey,
-  });
+const getSignedUrl = (config: any, filename: string): Promise<string> => new Promise((resolve, reject) => {
+  // AWS.config.update({
+  //   region: Config.Region,
+  //   accessKeyId: Config.AccessKeyId,
+  //   secretAccessKey: Config.SecretAccessKey,
+  // });
+  AWS.config.update(config);
+
   const s3 = new AWS.S3();
-  const awsParams = { Bucket: Config.bucket, Key: `public/${filename}` };
+  const awsParams = { Bucket: Config.Bucket, Key: `public/${filename}` };
   s3.getSignedUrl('getObject', awsParams, (err: Error, url: string) => {
     console.log(url);
     err ? reject(err) : resolve(url);
@@ -33,7 +36,7 @@ class Bottom extends React.Component<Props, {}> {
 
   handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
 
-  upload = async (media: MediaProps) => {
+  upload = async (media: Chat.MediaProps) => {
     const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
 
     console.log('fullpath', fullpath);
@@ -44,13 +47,14 @@ class Bottom extends React.Component<Props, {}> {
       contentType: 'audio/wav',
     });
 
-    console.log('ret', ret);
-
-    // const awsPath = `${Config.S3_URL}/${Config.bucket}/private/${Config.Cognito.IdentityPoolId}/${media.filename}`;
-
     const params = {
       timestamp: getTimeStamp(),
-      wav: await getSignedUrl(media.filename),
+      wav: await getSignedUrl({
+        region: Config.Region,
+        // accessKeyId: Config.AccessKeyId,
+        // secretAccessKey: Config.SecretAccessKey,
+        // tslint:disable-next-line:align
+      }, media.filename),
     };
     console.log('awsPath', params);
 

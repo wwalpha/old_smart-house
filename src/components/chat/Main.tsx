@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
-import Grid, { GridClassKey, GridProps } from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import AudioPlay from 'components/chat/AudioPlay';
 import { Props } from './Main.d';
+import { Chat } from 'models';
 
 class Main extends React.Component<Props, {}> {
   // componentDidUpdate(prevProps: Props, prevState: any) {
@@ -24,7 +25,7 @@ class Main extends React.Component<Props, {}> {
         classes={{ container: classes.root }}
       >
         {(() => {
-          return media.map((item: Media, index: number) => (
+          return media.map((item: Chat.MediaProps, index: number) => (
             <AudioPlay media={item} key={index} />
           ));
         })()}

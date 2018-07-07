@@ -5,7 +5,7 @@ export const getObject = (filepath: string): Promise<S3.PutObjectOutput> => new 
   const s3 = new S3();
 
   const params: S3.GetObjectRequest = {
-    Bucket: Config.bucket,
+    Bucket: Config.Bucket,
     Key: filepath,
   };
 
@@ -24,7 +24,7 @@ export const dirList = (): Promise<S3.ListObjectsOutput> => new Promise((resolve
   const s3 = new S3();
 
   const params: S3.ListObjectsRequest = {
-    Bucket: Config.bucket,
+    Bucket: Config.Bucket,
   };
 
   s3.listObjects(params, (error: AWSError, data: S3.ListObjectsOutput) => {

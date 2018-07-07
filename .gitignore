@@ -14,3 +14,4 @@ cordova/platforms/ios/www/bundle.js
 /cordova/plugins
 /src/utils/aws/config.ts
 /src/utils/firebase/config.ts
+/dist

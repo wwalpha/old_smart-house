@@ -1,5 +1,4 @@
-// export * from './firebase';
-// export { default as FirebaseList } from './firebase-list';
+export * from './firebase';
 
 import * as Storage from './storage';
 

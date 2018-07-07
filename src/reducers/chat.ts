@@ -1,12 +1,12 @@
 import { handleActions, Action } from 'redux-actions';
 import { SAVE_MEDIA } from 'ActionTypes';
 import { ChatCLass } from 'models/Chat';
-import { State, Payload } from 'models/Chat.d';
+import { Chat } from 'models';
 
 const initialState: any = new ChatCLass();
 
-const chat = handleActions<State, any>({
-  [SAVE_MEDIA]: (state: State, action: Action<Payload.SaveRecordFile>) => {
+const chat = handleActions<Chat.State, any>({
+  [SAVE_MEDIA]: (state: Chat.State, action: Action<Chat.Payload.SaveRecordFile>) => {
     return action.payload ? state.add(action.payload.media) : state;
   },
 

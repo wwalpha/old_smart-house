@@ -7,7 +7,7 @@ export const putObject = (localpath: string, bucketPath: string): Promise<S3.Put
   const s3 = new S3();
 
   const params: S3.PutObjectRequest = {
-    Bucket: Config.bucket,
+    Bucket: Config.Bucket,
     Key: bucketPath,
   };
 

@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { Provider } from 'react-redux';
 import { render } from 'react-dom';
+import { CognitoIdentityCredentials } from 'aws-sdk';
 import { createBrowserHistory } from 'history';
-import createstore from 'src/store';
 import Amplify from 'aws-amplify';
-import * as AWS from 'aws-sdk';
-import App from 'src/containers/App';
 import { isIOS } from 'react-device-detect';
 import { Cognito, Config } from 'utils/aws';
+import App from 'src/containers/App';
+import createstore from 'src/store';
 
 const history = createBrowserHistory();
 const store = createstore(history);
 
-const start = () => {
+const start = (credentials: any) => {
 
   render(
     <Provider store={store}>
-      <App />
+      <App credentials={credentials} />
     </Provider>,
     document.getElementById('root'),
   );
@@ -33,21 +33,19 @@ Amplify.configure({
   },
   Storage: {
     region: Config.Region,
-    bucket: Config.bucket,
-    IdentityPoolId: 'ap-northeast-1:00cc4b25-0d8e-4b64-a15f-ecb62f3d26f3',
+    bucket: Config.Bucket,
+    IdentityPoolId: Config.Cognito.IdentityPoolId,
   },
 });
 
-const username: string = 'test';
+const username: string = 'test12';
 const password: string = 'test1234567890';
 
 if (isIOS) {
   document.addEventListener(
     'deviceready',
-    () => Cognito.login(username, password).then(() => start()),
+    () => Cognito.login(username, password).then(credentials => start(credentials)),
     false);
 } else {
-  Cognito.login(username, password).then(() => {
-    start();
-  }).catch(err => console.log(err));
+  Cognito.login(username, password).then(credentials => start(credentials)).catch(err => console.log(err));
 }

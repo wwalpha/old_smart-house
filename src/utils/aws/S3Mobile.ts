@@ -22,7 +22,7 @@ export const putObject = async (localpath: string, bucketPath: string): Promise<
     const data: any = await readFile(localpath);
 
     const params: S3.PutObjectRequest = {
-      Bucket: Config.bucket,
+      Bucket: Config.Bucket,
       Key: bucketPath,
       Body: data,
     };

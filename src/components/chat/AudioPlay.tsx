@@ -14,12 +14,17 @@ class AudioPlay extends React.PureComponent<Props, any> {
   playsound = (media: Chat.MediaProps) => new Promise((resolve) => {
     media.file.play();
     resolve();
+    console.log('play end');
   })
 
   handlePlay = () => {
+    console.log('play start');
+
     this.setState({ playing: true });
 
     this.playsound(this.props.media).then(() => this.setState({ playing: false }));
+
+    console.log('disabled');
   }
 
   render() {

@@ -5,15 +5,13 @@ import AudioPlay from 'components/chat/AudioPlay';
 import { Props } from './Main.d';
 
 class Main extends React.Component<Props, {}> {
-  private grid: GridProps;
+  // componentDidUpdate(prevProps: Props, prevState: any) {
+  //   const div: HTMLDivElement = document.getElementById('chat_main') as HTMLDivElement;
 
-  componentDidUpdate(prevProps: Props, prevState: any) {
-    const div: HTMLDivElement = document.getElementById('chat_main') as HTMLDivElement;
-
-    div.scrollIntoView({
-      block: 'end',
-    });
-  }
+  //   div.scrollIntoView({
+  //     block: 'end',
+  //   });
+  // }
 
   render() {
     const { media = [], classes } = this.props;

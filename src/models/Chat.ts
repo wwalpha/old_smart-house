@@ -1,14 +1,12 @@
 import { Record, List } from 'immutable';
-import { Props } from './Chat.d';
-import { S3 } from 'utils/aws';
+import { Props, MediaProps } from './Chat.d';
 
 export class ChatCLass extends Record<Props>({
-  media: List<Media>(),
+  media: List<MediaProps>(),
 }) {
 
-  add(media: Media) {
+  add(media: MediaProps) {
     console.log(111);
-    // await S3.put('ttt', '444');
     console.log(media);
 
     return this.set('media', this.media.push(media));

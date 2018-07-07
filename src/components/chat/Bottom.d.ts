@@ -1,16 +1,12 @@
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
+import { Chat } from 'models';
 
 export interface Props extends WithStyles<StyleRules> {
-  saveRecordFile: (media: any) => void,
-}
-
-export interface MediaProps {
-  filename: string,
-  file: Media,
+  saveRecordFile: (media: Chat.MediaProps) => void,
 }
 
 export interface State {
-  media?: MediaProps,
+  media?: Chat.MediaProps,
   value?: string,
   isRecording: boolean,
 }

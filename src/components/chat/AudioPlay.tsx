@@ -4,14 +4,16 @@ import MicIcon from '@material-ui/icons/Mic';
 import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import { Props } from './AudioPlay.d';
+import { Chat } from 'models';
 
 class AudioPlay extends React.PureComponent<Props, any> {
   state = {
     playing: false,
   };
 
-  playsound = (media: Media) => new Promise((resolve) => {
-    media.play();
+  playsound = (media: Chat.MediaProps) => new Promise((resolve) => {
+    media.file.play();
+    resolve();
   })
 
   handlePlay = () => {
@@ -22,6 +24,7 @@ class AudioPlay extends React.PureComponent<Props, any> {
 
   render() {
     const { classes } = this.props;
+    console.log(this.props.media);
 
     return (
       <div className={classes.root}>

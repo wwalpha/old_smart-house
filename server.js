@@ -1,16 +1,18 @@
 const webpack = require('webpack');
 const express = require('express');
-const dev = require('webpack-dev-middleware');
-const hot = require('webpack-hot-middleware');
 const path = require('path');
 
-const webpackConfig = require('./webpack/webpack.dev');
+const dev = require('webpack-dev-middleware');
+// const hot = require('webpack-hot-middleware');
+// const webpackConfig = require('./webpack/webpack.dev');
+
+const webpackConfig = require('./webpack/webpack.device');
 
 const compiler = webpack(webpackConfig);
 const app = express();
 
 app.use(dev(compiler, { noInfo: true, publicPath: webpackConfig.output.publicPath }));
-app.use(hot(compiler));
+// app.use(hot(compiler));
 
 app.use('*', (req, res, next) => {
   const fileName = path.join(compiler.outputPath, 'index.html');

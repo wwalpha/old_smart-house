@@ -1,18 +1,19 @@
 import { List } from "immutable";
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
 import { ActionCreatorsMapObject, ActionCreator } from "redux";
-import * as Chat from 'actions/chat.d';
+import * as ChatActions from 'actions/chat.d';
+import { Chat } from "models";
 export * from 'src/store/index.d';
 
 export interface StateToProps {
-  media: Media[],
+  media: Chat.MediaProps[],
 }
 
 export interface DispatchToProps {
-  actions: Chat.Actions,
+  actions: ChatActions.Actions,
 }
 
-export type Actions = Chat.Actions;
+export type Actions = ChatActions.Actions;
 
 export interface Props extends StateToProps, DispatchToProps, WithStyles<StyleRules> {
 }

@@ -38,6 +38,9 @@
       "models/*": [
         "./src/models/*"
       ],
+      "models": [
+        "./src/models/index.d.ts"
+      ],
       "ActionTypes": [
         "./src/constants/ActionTypes"
       ]

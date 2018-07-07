@@ -1,17 +1,22 @@
 import { Record, List } from 'immutable';
 
+export interface MediaProps {
+  filename: string,
+  file: Media,
+}
+
 export interface Props extends Object {
-  media: List<Media>;
+  media: List<MediaProps>;
 }
 
 export module Payload {
   interface SaveRecordFile {
-    media?: Media;
+    media?: MediaProps;
   }
 }
 
 export interface State extends Record<Props> {
-  add: (media?: Media) => State;
+  add: (media?: MediaProps) => State;
 }
 
 export interface Store extends Props, State {

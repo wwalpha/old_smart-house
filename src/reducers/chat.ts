@@ -7,12 +7,7 @@ const initialState: any = new ChatCLass();
 
 const chat = handleActions<State, any>({
   [SAVE_MEDIA]: (state: State, action: Action<Payload.SaveRecordFile>) => {
-    console.log('SAVE_MEDIA');
-    if (!action.payload) return state;
-    console.log('123456');
-
-    // window.requestFileSystem()
-    return state.add(action.payload.media);
+    return action.payload ? state.add(action.payload.media) : state;
   },
 
   // tslint:disable-next-line:align

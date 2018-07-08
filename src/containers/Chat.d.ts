@@ -2,11 +2,12 @@ import { List } from "immutable";
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
 import { ActionCreatorsMapObject, ActionCreator } from "redux";
 import * as ChatActions from 'actions/chat.d';
-import { Chat } from "models";
+import { Chat, App } from "models";
 export * from 'src/store/index.d';
 
 export interface StateToProps {
   media: Chat.MediaProps[],
+  credentials: App.Credentials,
 }
 
 export interface DispatchToProps {

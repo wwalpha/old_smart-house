@@ -3,29 +3,12 @@ import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
 import { Storage } from 'aws-amplify';
-import { Config } from 'utils/aws';
+import { Config, S3Utils } from 'utils/aws';
 import { firebaseDb } from 'utils/firebase';
 import { readFile } from 'utils/fileSystem';
 import { getTimeStamp } from 'utils/system';
-import * as AWS from 'aws-sdk';
-import { Chat } from 'models';
+import { Chat, App } from 'models';
 import { Props, State } from './Bottom.d';
-
-const getSignedUrl = (config: any, filename: string): Promise<string> => new Promise((resolve, reject) => {
-  // AWS.config.update({
-  //   region: Config.Region,
-  //   accessKeyId: Config.AccessKeyId,
-  //   secretAccessKey: Config.SecretAccessKey,
-  // });
-  AWS.config.update(config);
-
-  const s3 = new AWS.S3();
-  const awsParams = { Bucket: Config.Bucket, Key: `public/${filename}` };
-  s3.getSignedUrl('getObject', awsParams, (err: Error, url: string) => {
-    console.log(url);
-    err ? reject(err) : resolve(url);
-  });
-});
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
@@ -36,25 +19,34 @@ class Bottom extends React.Component<Props, {}> {
 
   handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
 
-  upload = async (media: Chat.MediaProps) => {
+  upload = async (credentials: App.Credentials, media: Chat.MediaProps) => {
     const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
 
     console.log('fullpath', fullpath);
     const file: any = await readFile(fullpath);
     console.log('file', file);
 
-    const ret: Object = await Storage.put(media.filename, file, {
+    const ret = await Storage.put(media.filename, file, {
       contentType: 'audio/wav',
     });
 
+    console.log('ret', ret);
+
+    const config = {
+      region: Config.Region,
+      accessKeyId: credentials.accessKeyId,
+      secretAccessKey: credentials.secretAccessKey,
+    };
+
+    console.log(config);
+
+    const signedURL = await S3Utils.getSignedUrl(config, `public/${media.filename}`);
+
+    console.log('signedURL', signedURL);
+
     const params = {
       timestamp: getTimeStamp(),
-      wav: await getSignedUrl({
-        region: Config.Region,
-        // accessKeyId: Config.AccessKeyId,
-        // secretAccessKey: Config.SecretAccessKey,
-        // tslint:disable-next-line:align
-      }, media.filename),
+      wav: signedURL,
     };
     console.log('awsPath', params);
 
@@ -62,7 +54,7 @@ class Bottom extends React.Component<Props, {}> {
   }
 
   handleRecord = () => {
-    const { saveRecordFile } = this.props;
+    const { saveRecordFile, credentials } = this.props;
     const { isRecording, media } = this.state;
 
     this.setState({ isRecording: !isRecording });
@@ -71,7 +63,7 @@ class Bottom extends React.Component<Props, {}> {
       if (media) {
         media.file.stopRecord();
 
-        this.upload(media).then((params) => {
+        this.upload(credentials, media).then((params) => {
           console.log(params);
           firebaseDb.ref('messages').push(params, (error: Error) => {
             if (error) console.error(error);

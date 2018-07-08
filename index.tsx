@@ -12,11 +12,11 @@ import createstore from 'src/store';
 const history = createBrowserHistory();
 const store = createstore(history);
 
-const start = (credentials: any) => {
-
+const start = (userInfo: any) => {
+  console.log(userInfo);
   render(
     <Provider store={store}>
-      <App credentials={credentials} />
+      <App userInfo={userInfo} />
     </Provider>,
     document.getElementById('root'),
   );
@@ -40,12 +40,12 @@ Amplify.configure({
 
 const username: string = 'test12';
 const password: string = 'test1234567890';
-
+console.log(112323);
 if (isIOS) {
   document.addEventListener(
     'deviceready',
-    () => Cognito.login(username, password).then(credentials => start(credentials)),
+    () => Cognito.login(username, password).then(userInfo => start(userInfo)),
     false);
 } else {
-  Cognito.login(username, password).then(credentials => start(credentials)).catch(err => console.log(err));
+  Cognito.login(username, password).then(userInfo => start(userInfo)).catch(err => console.log(err));
 }

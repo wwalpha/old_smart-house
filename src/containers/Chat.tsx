@@ -11,13 +11,14 @@ import Browser from '../components/filebrowser/Browser';
 class Chat extends React.Component<Props, {}> {
 
   render() {
-    const { actions, media } = this.props;
+    const { actions, media, credentials } = this.props;
 
     return (
       <React.Fragment>
         {/* <Browser /> */}
         <Main media={media} />
         <Bottom
+          credentials={credentials}
           saveRecordFile={actions.saveRecordFile}
         />
       </React.Fragment>
@@ -41,6 +42,7 @@ const styles = (theme: Theme): StyleRules => ({
 
 const mapStateToProps = (state: Store) => ({
   media: state.get('chat').media.toJS(),
+  credentials: state.get('app').userInfo.credentials,
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({

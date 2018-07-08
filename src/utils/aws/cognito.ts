@@ -58,17 +58,17 @@ import { CognitoUser } from 'amazon-cognito-identity-js';
  * ユーザー存在しない場合、ユーザーを登録してからユーザー情報を取得する
  */
 export const login = async (username: string, password: string) => {
-  let userInfo: CognitoUser;
+  let user: CognitoUser;
   try {
-    userInfo = await Auth.signIn(username, password);
+    user = await Auth.signIn(username, password);
   } catch (error) {
     if (error.code === 'UserNotFoundException') {
       console.log(error);
     }
-    userInfo = await Auth.signUp({ username, password });
+    user = await Auth.signUp({ username, password });
   }
 
-  const credentials: CognitoIdentityCredentials = Auth.currentUserCredentials();
+  const credentials: CognitoIdentityCredentials = await Auth.currentUserCredentials();
 
-  return { userInfo, credentials };
+  return { user, credentials };
 };

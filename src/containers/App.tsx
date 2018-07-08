@@ -12,7 +12,7 @@ import { Props, Actions, DispatchToProps } from './App.d';
 class App extends React.Component<Props, {}> {
   // tslint:disable-next-line:function-name
   UNSAFE_componentWillMount() {
-    console.log(this.props.credentials);
+    this.props.actions.setUserInfo(this.props.userInfo);
   }
 
   render() {

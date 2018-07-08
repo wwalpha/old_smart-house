@@ -11,7 +11,7 @@ export type UserInfo = {
 };
 
 export interface Props extends Object {
-  userInfo?: UserInfo,
+  userInfo: UserInfo,
 }
 
 export module Payload {

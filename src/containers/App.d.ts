@@ -9,5 +9,5 @@ export interface DispatchToProps {
 export type Actions = AppActions.Actions;
 
 export interface Props extends DispatchToProps, WithStyles<StyleRules> {
-  credentials: App.Credentials,
+  userInfo: App.UserInfo,
 }

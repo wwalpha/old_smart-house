@@ -1,8 +1,9 @@
 import { Map, Record } from 'immutable';
-import { Chat } from '../models/index.d';
+import { Chat, App } from 'models';
 
 interface IStore {
   chat: Chat.Store,
+  app: App.Store,
 }
 
 export interface Store extends Map<keyof IStore, Record<any>> {

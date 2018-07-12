@@ -7,4 +7,3 @@
 /// <reference path="../node_modules/cordova-plugin-file/types/index.d.ts" />
 /// <reference path="../node_modules/aws-amplify/lib/index.d.ts" />
 /// <reference path="../node_modules/aws-sdk/index.d.ts" />
-/// <reference path="../node_modules/@types/graphql/index.d.ts" />

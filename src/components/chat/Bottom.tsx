@@ -4,7 +4,6 @@ import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
 import { Storage } from 'aws-amplify';
 import { Config, S3Utils } from 'utils/aws';
-import { firebaseDb } from 'utils/firebase';
 import { readFile } from 'utils/fileSystem';
 import { getTimeStamp } from 'utils/system';
 import { Chat, App } from 'models';
@@ -65,10 +64,10 @@ class Bottom extends React.Component<Props, {}> {
 
         this.upload(credentials, media).then((params) => {
           console.log(params);
-          firebaseDb.ref('messages').push(params, (error: Error) => {
-            if (error) console.error(error);
-            saveRecordFile(media);
-          });
+          // firebaseDb.ref('messages').push(params, (error: Error) => {
+          //   if (error) console.error(error);
+          //   saveRecordFile(media);
+          // });
         }).catch(error => console.log(error));
       }
     } else {

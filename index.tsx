@@ -23,14 +23,14 @@ const start = (userInfo: any) => {
   );
 };
 
-(global as any).fetch = require('node-fetch');
+// (global as any).fetch = require('node-fetch');
 
 Amplify.configure(config);
 // Amplify.configure({
-//   aws_appsync_graphqlEndpoint: 'https://qw3mafedined7gpfq3vzvtbiv4.appsync-api.ap-northeast-1.amazonaws.com/graphql',
+//   aws_appsync_graphqlEndpoint: 'https://r76uktcoofdxhplhflzcq7fjki.appsync-api.ap-northeast-1.amazonaws.com/graphql',
 //   aws_appsync_region: 'ap-northeast-1',
 //   aws_appsync_authenticationType: 'API_KEY',
-//   aws_appsync_apiKey: 'da2-t5mrubagq5ecxnt6kiy2w3twjm',
+//   aws_appsync_apiKey: 'fducbqsghrgc5bi5e6o7psye6m',
 // });
 
 const username: string = 'test12';
@@ -43,7 +43,7 @@ if (isIOS) {
     false);
 } else {
   Cognito.login(username, password).then((userInfo) => {
-
+    console.log(userInfo);
     const subscribeToEventComments = `subscription SubscribeToEventComments($eventId: String!) {
       subscribeToEventComments(eventId: $eventId) {
         eventId

@@ -47,5 +47,6 @@ declare module 'connected-react-router/immutable' {
 }
 
 declare module 'redux-api-middleware';
+declare module 'node-localstorage';
 
 declare var cordova: Cordova;

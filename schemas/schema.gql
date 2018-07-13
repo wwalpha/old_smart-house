@@ -1,0 +1,36 @@
+type S3Object {
+  bucket: String!
+  key: String!
+  region: String!
+}
+
+type RaspberryPi {
+  signedURL: String!
+}
+
+input S3ObjectInput {
+  bucket: String!
+  key: String!
+  region: String!
+  localUri: String!
+  mimeType: String!
+}
+
+type Query {
+  listMessage: S3Object
+}
+
+type Mutation {
+  addMessage(input: S3ObjectInput): 
+}
+
+type Subscription {
+  subscribeToRecvMessage: RaspberryPi
+    @aws_subscribe(mutations:["addMessage"])
+}
+
+schema {
+  query: Query
+  mutation: Mutation
+  subscription: Subscription 
+}

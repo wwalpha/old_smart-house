@@ -17,3 +17,4 @@ cordova/platforms/ios/www/bundle.js
 /dist
 /firebase
 /src/utils/firebase
+/yarn.lock

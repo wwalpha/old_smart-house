@@ -21,7 +21,7 @@ type Query {
 }
 
 type Mutation {
-  addMessage(input: S3ObjectInput): 
+  addMessage(input: S3ObjectInput): RaspberryPi
 }
 
 type Subscription {

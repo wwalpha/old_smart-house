@@ -25,7 +25,11 @@ class App extends React.Component<Props, {}> {
         justify="flex-end"
         classes={{ container: classes.container }}
       >
-        <Chat />
+        {/* <Chat /> */}
+        <input name="myFile" type="file" onChange={(e) => {
+          const { target: { value, files } } = e;
+
+        }} />
       </Grid>
     );
   }

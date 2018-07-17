@@ -6,8 +6,11 @@
 * Redux
 * GraphQL
 * Apollo Client
-* Html
-* CSS
+* Html, CSS
+
+## Required Library
+* AWS-Amplify
+* AWS-AppSync
 
 ## Concept
 ![Concept](./concept.png)

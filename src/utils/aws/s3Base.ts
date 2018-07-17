@@ -1,11 +1,11 @@
 import { S3, AWSError } from 'aws-sdk';
-import Config from './config';
+import Config from './aws-exports';
 
 export const getObject = (filepath: string): Promise<S3.PutObjectOutput> => new Promise((resolve, reject) => {
   const s3 = new S3();
 
   const params: S3.GetObjectRequest = {
-    Bucket: Config.Bucket,
+    Bucket: Config.aws_user_files_s3_bucket,
     Key: filepath,
   };
 
@@ -24,7 +24,7 @@ export const dirList = (): Promise<S3.ListObjectsOutput> => new Promise((resolve
   const s3 = new S3();
 
   const params: S3.ListObjectsRequest = {
-    Bucket: Config.Bucket,
+    Bucket: Config.aws_user_files_s3_bucket,
   };
 
   s3.listObjects(params, (error: AWSError, data: S3.ListObjectsOutput) => {

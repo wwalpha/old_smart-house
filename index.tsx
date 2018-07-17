@@ -7,7 +7,7 @@ import { isIOS } from 'react-device-detect';
 import { Cognito } from 'utils/aws';
 import App from 'src/containers/App';
 import createstore from 'src/store';
-import config from 'src/aws-exports';
+import { Config } from 'src/utils/aws';
 import AWSAppSyncClient from 'aws-appsync';
 import gql from 'graphql-tag';
 import * as Observable from 'zen-observable';
@@ -26,7 +26,7 @@ const start = (userInfo: any) => {
 
 // (global as any).fetch = require('node-fetch');
 
-Amplify.configure(config);
+Amplify.configure(Config);
 
 const username: string = 'test11';
 const password: string = 'Test1234567890';
@@ -39,8 +39,8 @@ const startX = async () => {
 
   const client = new AWSAppSyncClient({
     disableOffline: true,
-    url: config.aws_appsync_graphqlEndpoint,
-    region: config.aws_project_region,
+    url: Config.aws_appsync_graphqlEndpoint,
+    region: Config.aws_project_region,
     auth: {
       type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
       jwtToken,
@@ -56,7 +56,7 @@ const startX = async () => {
       }
     }`);
 
-    //Now subscribe to results
+    // Now subscribe to results
     const observable = client.subscribe({ query: subquery });
     console.log(33333);
     const realtimeResults = function realtimeResults(data: any) {
@@ -69,62 +69,22 @@ const startX = async () => {
       error: console.log,
     });
   });
-}
-
-const test = () => {
-  Cognito.login(username, password).then((userInfo) => {
-    console.log(userInfo);
-
-    // const AddMessage = `mutation AddMessage($bucket: String!, $key: String!, $region: String!, $localUri: String!, $mimeType: String!) {
-    //   addMessage(bucket: $bucket, key: $key, region: $region, localUri: $localUri, mimeType: $mimeType) {
-    //     signedURL
-    //   }
-    // }`;
-
-    // // Mutation
-    // const eventDetails = {
-    //   bucket: "xxx",
-    //   key: "private/README.txt",
-    //   region: "ap-northeast-1",
-    //   localUri: "xxx",
-    //   mimeType: "wav"
-    // };
-
-    // (API.graphql(graphqlOperation(AddMessage, eventDetails)) as Promise<any>).then((value) => {
-    //   console.log(value);
-    // });
-
-
-    const SubscribeToEventComments = `subscription SubscribeToRecvMessage {
-      subscribeToRecvMessage {
-        signedURL
-      }
-    }`;
-
-    // Subscribe with eventId 123
-    const subscription = (API.graphql(
-      graphqlOperation(SubscribeToEventComments)
-    ) as Observable<any>).subscribe({
-      next: (eventData) => console.log(eventData.value.data.subscribeToRecvMessage.signedURL)
-    });
-
-  }).catch(err => console.log(err));
-}
+};
 
 const startX2 = () => {
   // console.log(Auth.currentCredentials());
 
   const auth = {
     type: AUTH_TYPE.API_KEY,
-    apiKey: () => config.aws_appsync_apiKey,
+    apiKey: () => Config.aws_appsync_apiKey,
   };
 
   console.log(auth);
 
   const client = new AWSAppSyncClient({
     disableOffline: true,
-    url: config.aws_appsync_graphqlEndpoint,
-    region: config.aws_project_region,
+    url: Config.aws_appsync_graphqlEndpoint,
+    region: Config.aws_project_region,
     auth,
   });
 
@@ -137,7 +97,7 @@ const startX2 = () => {
       }
     }`);
 
-    //Now subscribe to results
+    // Now subscribe to results
     const observable = client.subscribe({ query: subquery });
     console.log(33333);
     const realtimeResults = function realtimeResults(data: any) {
@@ -150,7 +110,7 @@ const startX2 = () => {
       error: console.log,
     });
   });
-}
+};
 
 const startNew = async () => {
   await Cognito.login(username, password);
@@ -159,8 +119,8 @@ const startNew = async () => {
 
   const client = new AWSAppSyncClient({
     disableOffline: true,
-    url: config.aws_appsync_graphqlEndpoint,
-    region: config.aws_project_region,
+    url: Config.aws_appsync_graphqlEndpoint,
+    region: Config.aws_project_region,
     auth: {
       type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
       jwtToken,
@@ -169,7 +129,7 @@ const startNew = async () => {
   });
 
   client.hydrated().then((client) => {
-    const AddMessage = gql(`mutation AddMessage($bucket: String!, $key: String!, $region: String!, $localUri: String!, $mimeType: String!) {
+    const addMessage = gql(`mutation AddMessage($bucket: String!, $key: String!, $region: String!, $localUri: String!, $mimeType: String!) {
       addMessage(bucket: $bucket, key: $key, region: $region, localUri: $localUri, mimeType: $mimeType) {
         signedURL
       }
@@ -177,19 +137,18 @@ const startNew = async () => {
 
     client
       .mutate({
-        mutation: AddMessage, context: {
-          bucket: config.aws_user_files_s3_bucket,
-          key: "private/test.wav",
-          region: config.aws_user_files_s3_bucket_region,
-          localUri: "xxx",
-          mimeType: 'audio/wav'
-        }
+        mutation: addMessage, context: {
+          bucket: Config.aws_user_files_s3_bucket,
+          key: 'private/test.wav',
+          region: Config.aws_user_files_s3_bucket_region,
+          localUri: 'xxx',
+          mimeType: 'audio/wav',
+        },
       })
-      .then((value) => console.log(value))
+      .then(console.log)
       .catch(console.log);
   });
-}
-
+};
 
 if (isIOS) {
   document.addEventListener(

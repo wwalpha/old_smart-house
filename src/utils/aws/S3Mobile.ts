@@ -1,6 +1,6 @@
 import * as AWS from 'aws-sdk';
 import { readFile } from '../fileSystem';
-import Config from './config';
+import Config from './aws-exports';
 
 export * from './s3Base';
 
@@ -8,7 +8,7 @@ export const getSignedUrl = (config: any, bucketPath: string): Promise<string> =
   AWS.config.update(config);
 
   const s3 = new AWS.S3();
-  const awsParams = { Bucket: Config.Bucket, Key: bucketPath };
+  const awsParams = { Bucket: Config.aws_user_files_s3_bucket, Key: bucketPath };
   s3.getSignedUrl('getObject', awsParams, (err: Error, url: string) => {
     err ? reject(err) : resolve(url);
   });

@@ -7,7 +7,7 @@ import { readFile } from 'utils/fileSystem';
 import { getTimeStamp } from 'utils/system';
 import { Chat, App } from 'models';
 import { Props, State } from './Bottom.d';
-import config from 'src/aws-exports';
+import { Config } from 'utils/aws';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
@@ -27,7 +27,7 @@ class Bottom extends React.Component<Props, {}> {
 
     console.log('ret', ret);
 
-    const AddMessage = `mutation AddMessage($bucket: String!, $key: String!, $region: String!, $mimeType: String!) {
+    const addMessage = `mutation AddMessage($bucket: String!, $key: String!, $region: String!, $mimeType: String!) {
       addMessage(bucket: $bucket, key: $key, region: $region, mimeType: $mimeType) {
         signedURL
       }
@@ -35,15 +35,14 @@ class Bottom extends React.Component<Props, {}> {
 
     // Mutation
     const values = {
-      bucket: config.aws_user_files_s3_bucket,
+      bucket: Config.aws_user_files_s3_bucket,
       key: `public/${media.filename}`,
-      region: config.aws_project_region,
+      region: Config.aws_project_region,
       mimeType: 'audio/wav',
     };
 
-    return await (API.graphql(graphqlOperation(AddMessage, values)) as Promise<any>);
+    return await (API.graphql(graphqlOperation(addMessage, values)) as Promise<any>);
   }
-
 
   handleRecord = () => {
     const { saveRecordFile, credentials } = this.props;

@@ -15,8 +15,7 @@ import * as Observable from 'zen-observable';
 const history = createBrowserHistory();
 const store = createstore(history);
 
-const start = (userInfo?: any) => {
-  // console.log(userInfo);
+const start = (userInfo: any) => {
   render(
     <Provider store={store}>
       <App userInfo={userInfo} />
@@ -27,7 +26,7 @@ const start = (userInfo?: any) => {
 
 // (global as any).fetch = require('node-fetch');
 
-// Amplify.configure(config);
+Amplify.configure(config);
 
 const username: string = 'test11';
 const password: string = 'Test1234567890';
@@ -111,8 +110,6 @@ const test = () => {
 
   }).catch(err => console.log(err));
 }
-
-
 
 const startX2 = () => {
   // console.log(Auth.currentCredentials());
@@ -200,6 +197,7 @@ if (isIOS) {
     () => Cognito.login(username, password).then(userInfo => start(userInfo)),
     false);
 } else {
-  // startNew();
-  start();
+  Cognito.login(username, password)
+    .then(userInfo => start(userInfo))
+    .catch(console.log);
 }

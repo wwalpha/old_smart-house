@@ -2,12 +2,12 @@ import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import MicIcon from '@material-ui/icons/Mic';
-import { Storage } from 'aws-amplify';
-import { Config, S3Utils } from 'utils/aws';
+import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { readFile } from 'utils/fileSystem';
 import { getTimeStamp } from 'utils/system';
 import { Chat, App } from 'models';
 import { Props, State } from './Bottom.d';
+import config from 'src/aws-exports';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
@@ -18,39 +18,32 @@ class Bottom extends React.Component<Props, {}> {
 
   handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
 
-  upload = async (credentials: App.Credentials, media: Chat.MediaProps) => {
+  upload = async (media: Chat.MediaProps) => {
     const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
 
-    console.log('fullpath', fullpath);
     const file: any = await readFile(fullpath);
-    console.log('file', file);
 
-    const ret = await Storage.put(media.filename, file, {
-      contentType: 'audio/wav',
-    });
+    const ret = await Storage.put(media.filename, file, { contentType: 'audio/wav' });
 
     console.log('ret', ret);
 
-    const config = {
-      region: Config.Region,
-      accessKeyId: credentials.accessKeyId,
-      secretAccessKey: credentials.secretAccessKey,
+    const AddMessage = `mutation AddMessage($bucket: String!, $key: String!, $region: String!, $mimeType: String!) {
+      addMessage(bucket: $bucket, key: $key, region: $region, mimeType: $mimeType) {
+        signedURL
+      }
+    }`;
+
+    // Mutation
+    const values = {
+      bucket: config.aws_user_files_s3_bucket,
+      key: `public/${media.filename}`,
+      region: config.aws_project_region,
+      mimeType: 'audio/wav',
     };
 
-    console.log(config);
-
-    const signedURL = await S3Utils.getSignedUrl(config, `public/${media.filename}`);
-
-    console.log('signedURL', signedURL);
-
-    const params = {
-      timestamp: getTimeStamp(),
-      wav: signedURL,
-    };
-    console.log('awsPath', params);
-
-    return params;
+    return await (API.graphql(graphqlOperation(AddMessage, values)) as Promise<any>);
   }
+
 
   handleRecord = () => {
     const { saveRecordFile, credentials } = this.props;
@@ -62,13 +55,9 @@ class Bottom extends React.Component<Props, {}> {
       if (media) {
         media.file.stopRecord();
 
-        this.upload(credentials, media).then((params) => {
-          console.log(params);
-          // firebaseDb.ref('messages').push(params, (error: Error) => {
-          //   if (error) console.error(error);
-          //   saveRecordFile(media);
-          // });
-        }).catch(error => console.log(error));
+        this.upload(media)
+          .then(console.log)
+          .catch(console.log);
       }
     } else {
       const filename = `${getTimeStamp()}.wav`;

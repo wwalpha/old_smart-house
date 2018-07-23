@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import Input from '@material-ui/core/Input';
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
+import Collapse from '@material-ui/core/Collapse';
 import MicIcon from '@material-ui/icons/Mic';
 import { Storage, API, graphqlOperation } from 'aws-amplify';
 import { readFile } from 'utils/fileSystem';
@@ -97,40 +101,53 @@ class Bottom extends React.Component<Props, {}> {
     const { isRecording } = this.state;
 
     return (
-      <React.Fragment>
-        <Button
-          variant="contained"
-          size="large"
-          color="primary"
-          classes={{
-            root: classes.root,
-            contained: !isRecording ? classes.mic : classes.recording,
-          }}
-          onTouchStart={this.handleTouchStart}
-          onTouchEnd={this.handleTouchEnd}
-          disableRipple
-          disableFocusRipple
-          fullWidth
-        >
-          <MicIcon />
-        </Button>
-      </React.Fragment >
+      <Paper classes={{ root: classes.paper }}>
+        <Grid container>
+          <Button
+            variant="contained"
+            color="primary"
+            classes={{
+              root: classes.button,
+              contained: classes.mic,
+            }}
+            onTouchStart={this.handleTouchStart}
+            onTouchEnd={this.handleTouchEnd}
+            disableRipple
+            disableFocusRipple
+          >
+            <MicIcon />
+          </Button>
+          <Input
+            defaultValue="Hello world"
+            classes={{ root: classes.input }}
+            style={{ width: isRecording ? '0px' : 'inherit' }}
+          />
+        </Grid>
+      </Paper>
     );
   }
 }
 
 const styles = (theme: Theme): StyleRules => ({
-  root: {
-    transition: 'unset',
+  paper: {
+    backgroundColor: theme.palette.grey['200'],
   },
-  play: {
-    top: 0,
-    position: 'fixed',
+  button: {
+    transition: 'unset',
+    margin: theme.spacing.unit,
+    minWidth: '80px',
   },
   mic: {
     color: theme.palette.grey['100'],
     backgroundColor: theme.palette.primary.main,
     height: '40px',
+    '&:hover': {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    '&:active': {
+      width: '100%',
+      backgroundColor: theme.palette.secondary.main,
+    },
   },
   recording: {
     height: '40px',
@@ -139,6 +156,14 @@ const styles = (theme: Theme): StyleRules => ({
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
     },
+    '&:active': {
+      backgroundColor: theme.palette.secondary.main,
+    },
+    width: '100%',
+  },
+  input: {
+    margin: theme.spacing.unit,
+    flexGrow: 1,
   },
 });
 

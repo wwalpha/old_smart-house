@@ -4,9 +4,9 @@ import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader';
 import { StyleRules, withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import * as AppActions from 'actions/app';
-
+import TopNavigation from 'src/components/TopNavigation';
 import Chat from 'src/containers/Chat';
+import * as AppActions from 'actions/app';
 import { Props, Actions, DispatchToProps } from './App.d';
 
 class App extends React.Component<Props, {}> {
@@ -22,9 +22,9 @@ class App extends React.Component<Props, {}> {
       <Grid
         container
         direction="column"
-        justify="flex-end"
         classes={{ container: classes.container }}
       >
+        <TopNavigation />
         <Chat />
       </Grid>
     );
@@ -33,7 +33,8 @@ class App extends React.Component<Props, {}> {
 
 const styles = (): StyleRules => ({
   container: {
-    height: '100vh',
+    height: '100%',
+    minHeight: '100vh',
   },
 });
 

@@ -44,33 +44,45 @@ class Bottom extends React.Component<Props, {}> {
     return await (API.graphql(graphqlOperation(addMessage, values)) as Promise<any>);
   }
 
-  handleRecord = () => {
-    const { saveRecordFile, credentials } = this.props;
-    const { isRecording, media } = this.state;
+  /** 録音開始 */
+  handleTouchStart = (e: any) => {
+    if (1 === 1) {
+      this.setState({ isRecording: true });
+      return;
+    }
+    const filename = `${getTimeStamp()}.wav`;
+    const media = new Media(filename, () => { });
 
-    this.setState({ isRecording: !isRecording });
+    // start recording
+    media.startRecord();
 
-    if (isRecording) {
-      if (media) {
-        media.file.stopRecord();
+    this.setState({
+      media: {
+        filename,
+        file: media,
+      },
+      isRecording: true,
+    });
+  }
 
-        this.upload(media)
-          .then(console.log)
-          .catch(console.log);
-      }
-    } else {
-      const filename = `${getTimeStamp()}.wav`;
-      const media = new Media(filename, () => { });
+  /** 録音終了 */
+  handleTouchEnd = (e: any) => {
+    if (1 === 1) {
+      this.setState({ isRecording: false });
+      return;
+    }
 
-      // start recording
-      media.startRecord();
+    const { media } = this.state;
 
-      this.setState({
-        media: {
-          filename,
-          file: media,
-        },
-      });
+    if (media) {
+      media.file.stopRecord();
+
+      this.upload(media)
+        .then((value) => {
+          this.setState({ isRecording: false });
+          console.log(value);
+        })
+        .catch(console.log);
     }
   }
 
@@ -85,21 +97,24 @@ class Bottom extends React.Component<Props, {}> {
     const { isRecording } = this.state;
 
     return (
-      <Button
-        variant="contained"
-        size="large"
-        color="primary"
-        classes={{
-          root: classes.root,
-          contained: !isRecording ? classes.mic : classes.recording,
-        }}
-        onClick={this.handleRecord}
-        disableRipple
-        disableFocusRipple
-        fullWidth
-      >
-        <MicIcon />
-      </Button>
+      <React.Fragment>
+        <Button
+          variant="contained"
+          size="large"
+          color="primary"
+          classes={{
+            root: classes.root,
+            contained: !isRecording ? classes.mic : classes.recording,
+          }}
+          onTouchStart={this.handleTouchStart}
+          onTouchEnd={this.handleTouchEnd}
+          disableRipple
+          disableFocusRipple
+          fullWidth
+        >
+          <MicIcon />
+        </Button>
+      </React.Fragment >
     );
   }
 }
@@ -114,8 +129,11 @@ const styles = (theme: Theme): StyleRules => ({
   },
   mic: {
     color: theme.palette.grey['100'],
+    backgroundColor: theme.palette.primary.main,
+    height: '40px',
   },
   recording: {
+    height: '40px',
     color: `${theme.palette.grey['100']} !important`,
     backgroundColor: theme.palette.secondary.main,
     '&:hover': {

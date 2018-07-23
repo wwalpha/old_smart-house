@@ -31,124 +31,124 @@ Amplify.configure(Config);
 const username: string = 'test11';
 const password: string = 'Test1234567890';
 
-const AUTH_TYPE = require('aws-appsync/lib/link/auth-link').AUTH_TYPE;
+// const AUTH_TYPE = require('aws-appsync/lib/link/auth-link').AUTH_TYPE;
 
-const startX = async () => {
-  const userInfo = await Cognito.login(username, password);
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+// const startX = async () => {
+//   const userInfo = await Cognito.login(username, password);
+//   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
 
-  const client = new AWSAppSyncClient({
-    disableOffline: true,
-    url: Config.aws_appsync_graphqlEndpoint,
-    region: Config.aws_project_region,
-    auth: {
-      type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
-      jwtToken,
-    },
-  });
+//   const client = new AWSAppSyncClient({
+//     disableOffline: true,
+//     url: Config.aws_appsync_graphqlEndpoint,
+//     region: Config.aws_project_region,
+//     auth: {
+//       type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+//       jwtToken,
+//     },
+//   });
 
-  client.hydrated().then((client) => {
-    console.log(2222222222222222222222222);
-    const subquery = gql(`
-    subscription SubscribeToRecvMessage {
-      subscribeToRecvMessage {
-        signedURL
-      }
-    }`);
+//   client.hydrated().then((client) => {
+//     console.log(2222222222222222222222222);
+//     const subquery = gql(`
+//     subscription SubscribeToRecvMessage {
+//       subscribeToRecvMessage {
+//         signedURL
+//       }
+//     }`);
 
-    // Now subscribe to results
-    const observable = client.subscribe({ query: subquery });
-    console.log(33333);
-    const realtimeResults = function realtimeResults(data: any) {
-      console.log('realtime data: ', data);
-    };
+//     // Now subscribe to results
+//     const observable = client.subscribe({ query: subquery });
+//     console.log(33333);
+//     const realtimeResults = function realtimeResults(data: any) {
+//       console.log('realtime data: ', data);
+//     };
 
-    observable.subscribe({
-      next: realtimeResults,
-      complete: console.log,
-      error: console.log,
-    });
-  });
-};
+//     observable.subscribe({
+//       next: realtimeResults,
+//       complete: console.log,
+//       error: console.log,
+//     });
+//   });
+// };
 
-const startX2 = () => {
-  // console.log(Auth.currentCredentials());
+// const startX2 = () => {
+//   // console.log(Auth.currentCredentials());
 
-  const auth = {
-    type: AUTH_TYPE.API_KEY,
-    apiKey: () => Config.aws_appsync_apiKey,
-  };
+//   const auth = {
+//     type: AUTH_TYPE.API_KEY,
+//     apiKey: () => Config.aws_appsync_apiKey,
+//   };
 
-  console.log(auth);
+//   console.log(auth);
 
-  const client = new AWSAppSyncClient({
-    disableOffline: true,
-    url: Config.aws_appsync_graphqlEndpoint,
-    region: Config.aws_project_region,
-    auth,
-  });
+//   const client = new AWSAppSyncClient({
+//     disableOffline: true,
+//     url: Config.aws_appsync_graphqlEndpoint,
+//     region: Config.aws_project_region,
+//     auth,
+//   });
 
-  client.hydrated().then((client) => {
-    console.log(2222222222222222222222222);
-    const subquery = gql(`
-    subscription SubscribeToRecvMessage {
-      subscribeToRecvMessage {
-        signedURL
-      }
-    }`);
+//   client.hydrated().then((client) => {
+//     console.log(2222222222222222222222222);
+//     const subquery = gql(`
+//     subscription SubscribeToRecvMessage {
+//       subscribeToRecvMessage {
+//         signedURL
+//       }
+//     }`);
 
-    // Now subscribe to results
-    const observable = client.subscribe({ query: subquery });
-    console.log(33333);
-    const realtimeResults = function realtimeResults(data: any) {
-      console.log('realtime data: ', data);
-    };
+//     // Now subscribe to results
+//     const observable = client.subscribe({ query: subquery });
+//     console.log(33333);
+//     const realtimeResults = function realtimeResults(data: any) {
+//       console.log('realtime data: ', data);
+//     };
 
-    observable.subscribe({
-      next: realtimeResults,
-      complete: console.log,
-      error: console.log,
-    });
-  });
-};
+//     observable.subscribe({
+//       next: realtimeResults,
+//       complete: console.log,
+//       error: console.log,
+//     });
+//   });
+// };
 
-const startNew = async () => {
-  await Cognito.login(username, password);
-  const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
-  const credentials = await Auth.currentCredentials();
+// const startNew = async () => {
+//   await Cognito.login(username, password);
+//   const jwtToken = (await Auth.currentSession()).getIdToken().getJwtToken();
+//   const credentials = await Auth.currentCredentials();
 
-  const client = new AWSAppSyncClient({
-    disableOffline: true,
-    url: Config.aws_appsync_graphqlEndpoint,
-    region: Config.aws_project_region,
-    auth: {
-      type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
-      jwtToken,
-    },
-    complexObjectsCredentials: credentials,
-  });
+//   const client = new AWSAppSyncClient({
+//     disableOffline: true,
+//     url: Config.aws_appsync_graphqlEndpoint,
+//     region: Config.aws_project_region,
+//     auth: {
+//       type: AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
+//       jwtToken,
+//     },
+//     complexObjectsCredentials: credentials,
+//   });
 
-  client.hydrated().then((client) => {
-    const addMessage = gql(`mutation AddMessage($bucket: String!, $key: String!, $region: String!, $localUri: String!, $mimeType: String!) {
-      addMessage(bucket: $bucket, key: $key, region: $region, localUri: $localUri, mimeType: $mimeType) {
-        signedURL
-      }
-    }`);
+//   client.hydrated().then((client) => {
+//     const addMessage = gql(`mutation AddMessage($bucket: String!, $key: String!, $region: String!, $localUri: String!, $mimeType: String!) {
+//       addMessage(bucket: $bucket, key: $key, region: $region, localUri: $localUri, mimeType: $mimeType) {
+//         signedURL
+//       }
+//     }`);
 
-    client
-      .mutate({
-        mutation: addMessage, context: {
-          bucket: Config.aws_user_files_s3_bucket,
-          key: 'private/test.wav',
-          region: Config.aws_user_files_s3_bucket_region,
-          localUri: 'xxx',
-          mimeType: 'audio/wav',
-        },
-      })
-      .then(console.log)
-      .catch(console.log);
-  });
-};
+//     client
+//       .mutate({
+//         mutation: addMessage, context: {
+//           bucket: Config.aws_user_files_s3_bucket,
+//           key: 'private/test.wav',
+//           region: Config.aws_user_files_s3_bucket_region,
+//           localUri: 'xxx',
+//           mimeType: 'audio/wav',
+//         },
+//       })
+//       .then(console.log)
+//       .catch(console.log);
+//   });
+// };
 
 if (isIOS) {
   document.addEventListener(

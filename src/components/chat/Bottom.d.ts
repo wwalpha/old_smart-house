@@ -9,4 +9,5 @@ export interface State {
   media?: Chat.MediaProps,
   value?: string,
   isRecording: boolean,
+  inputValue?: string,
 }

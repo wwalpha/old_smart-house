@@ -18,6 +18,7 @@ class Bottom extends React.Component<Props, {}> {
     media: undefined,
     value: undefined,
     isRecording: false,
+    inputValue: undefined,
   };
 
   handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
@@ -50,10 +51,10 @@ class Bottom extends React.Component<Props, {}> {
 
   /** 録音開始 */
   handleTouchStart = (e: any) => {
-    if (1 === 1) {
-      this.setState({ isRecording: true });
-      return;
-    }
+    // if (1 === 1) {
+    //   this.setState({ isRecording: true });
+    //   return;
+    // }
     const filename = `${getTimeStamp()}.wav`;
     const media = new Media(filename, () => { });
 
@@ -71,21 +72,20 @@ class Bottom extends React.Component<Props, {}> {
 
   /** 録音終了 */
   handleTouchEnd = (e: any) => {
-    if (1 === 1) {
-      this.setState({ isRecording: false });
-      return;
-    }
+    // if (1 === 1) {
+    //   this.setState({ isRecording: false });
+    //   return;
+    // }
 
     const { media } = this.state;
 
     if (media) {
       media.file.stopRecord();
 
+      this.setState({ isRecording: false });
+
       this.upload(media)
-        .then((value) => {
-          this.setState({ isRecording: false });
-          console.log(value);
-        })
+        .then(console.log)
         .catch(console.log);
     }
   }
@@ -96,33 +96,41 @@ class Bottom extends React.Component<Props, {}> {
     if (media) media.file.play();
   }
 
+  handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(this.state.inputValue);
+  }
+
   render() {
     const { classes } = this.props;
     const { isRecording } = this.state;
 
     return (
       <Paper classes={{ root: classes.paper }}>
-        <Grid container>
-          <Button
-            variant="contained"
-            color="primary"
-            classes={{
-              root: classes.button,
-              contained: classes.mic,
-            }}
-            onTouchStart={this.handleTouchStart}
-            onTouchEnd={this.handleTouchEnd}
-            disableRipple
-            disableFocusRipple
-          >
-            <MicIcon />
-          </Button>
-          <Input
-            defaultValue="Hello world"
-            classes={{ root: classes.input }}
-            style={{ width: isRecording ? '0px' : 'inherit' }}
-          />
-        </Grid>
+        <form onSubmit={this.handleSubmit}>
+          <Grid container wrap="nowrap">
+            <Button
+              variant="contained"
+              color="primary"
+              classes={{
+                root: classes.button,
+                contained: isRecording ? classes.recording : classes.recorded,
+              }}
+              onTouchStart={this.handleTouchStart}
+              onTouchEnd={this.handleTouchEnd}
+              disableRipple
+              disableFocusRipple
+            >
+              <MicIcon />
+            </Button>
+            <Input
+              value={this.state.inputValue}
+              classes={{ root: classes.input }}
+              style={{ display: isRecording ? 'none' : 'inherit' }}
+              onChange={(e: any) => this.setState({ inputValue: e.target.value })}
+            />
+          </Grid>
+        </form>
       </Paper>
     );
   }
@@ -137,29 +145,19 @@ const styles = (theme: Theme): StyleRules => ({
     margin: theme.spacing.unit,
     minWidth: '80px',
   },
-  mic: {
-    color: theme.palette.grey['100'],
-    backgroundColor: theme.palette.primary.main,
-    height: '40px',
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.main,
-    },
-    '&:active': {
-      width: '100%',
-      backgroundColor: theme.palette.secondary.main,
-    },
-  },
   recording: {
-    height: '40px',
-    color: `${theme.palette.grey['100']} !important`,
+    color: theme.palette.grey['100'],
     backgroundColor: theme.palette.secondary.main,
     '&:hover': {
       backgroundColor: theme.palette.secondary.main,
     },
-    '&:active': {
-      backgroundColor: theme.palette.secondary.main,
-    },
+    height: '40px',
     width: '100%',
+  },
+  recorded: {
+    color: theme.palette.grey['100'],
+    backgroundColor: theme.palette.primary.main,
+    height: '40px',
   },
   input: {
     margin: theme.spacing.unit,

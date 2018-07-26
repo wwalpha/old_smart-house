@@ -17,8 +17,8 @@ class Main extends React.Component<Props, {}> {
         classes={{ container: classes.root }}
       >
         {(() => {
-          return messages.map((item: Chat.MediaProps, index: number) => (
-            <MessageItem media={item} key={index} />
+          return messages.map((item: Chat.Message, index: number) => (
+            <MessageItem item={item} key={index} />
           ));
         })()}
       </Grid>
@@ -28,7 +28,7 @@ class Main extends React.Component<Props, {}> {
 
 const styles = (theme: Theme): StyleRules => ({
   root: {
-    overflowY: 'scroll',
+    overflowY: 'hidden',
     flexWrap: 'nowrap',
     maxHeight: 'calc(100vh - 40px)',
   },

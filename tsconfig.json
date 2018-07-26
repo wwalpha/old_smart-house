@@ -41,7 +41,7 @@
       "@models": [
         "./src/models/index.d.ts"
       ],
-      "ActionType": [
+      "ActionTypes": [
         "./src/constants/ActionTypes.ts"
       ]
     }

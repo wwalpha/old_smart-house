@@ -18,8 +18,8 @@ export interface Props extends Object {
 
 export module Payload {
   interface AddMessage {
-    type: string,
-    message?: MediaProps | string,
+    type: MsgType,
+    message: MediaProps | string,
   }
 }
 

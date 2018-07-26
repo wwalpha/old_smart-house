@@ -4,16 +4,14 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
-import Collapse from '@material-ui/core/Collapse';
 import MicIcon from '@material-ui/icons/Mic';
 import { getTimeStamp } from 'utils/system';
-import { Chat, App } from 'models';
 import { Props, State } from './Bottom.d';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
     media: undefined,
-    chat: undefined,
+    chat: '',
     isRecording: false,
   };
 
@@ -69,7 +67,7 @@ class Bottom extends React.Component<Props, {}> {
     }
 
     // 入力値をクリアする
-    this.setState({ chat: undefined });
+    this.setState({ chat: '' });
   }
 
   render() {

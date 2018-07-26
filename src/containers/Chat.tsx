@@ -12,7 +12,7 @@ import Browser from '../components/filebrowser/Browser';
 class Chat extends React.Component<Props, {}> {
 
   render() {
-    const { actions, media, classes } = this.props;
+    const { actions, messages, classes } = this.props;
 
     return (
       <Grid
@@ -22,9 +22,9 @@ class Chat extends React.Component<Props, {}> {
         classes={{ container: classes.container }}
       >
         {/* <Browser /> */}
-        <Main media={media} />
+        <Main messages={messages} />
         <Bottom
-          saveRecordFile={actions.saveRecordFile}
+          addMessage={actions.addMessage}
         />
       </Grid>
     );
@@ -38,7 +38,7 @@ const styles = (theme: Theme): StyleRules => ({
 });
 
 const mapStateToProps = (state: Store) => ({
-  media: state.get('chat').media.toJS(),
+  messages: state.get('chat').messages.toJS(),
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<any>) => ({

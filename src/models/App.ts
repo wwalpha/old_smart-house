@@ -1,6 +1,6 @@
 import { CognitoIdentityCredentials } from 'aws-sdk';
 import { Record } from 'immutable';
-import { App } from 'models';
+import { App } from '@models';
 
 export class AppClass extends Record<App.Props>({
   userInfo: undefined,

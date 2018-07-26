@@ -6,7 +6,7 @@ import { Chat, App } from "@models";
 export * from 'src/store/index.d';
 
 export interface StateToProps {
-  media: Chat.MediaProps[]
+  messages: Chat.Message[],
 }
 
 export interface DispatchToProps {

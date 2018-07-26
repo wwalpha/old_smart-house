@@ -1,7 +1,7 @@
 import { handleActions, Action } from 'redux-actions';
 import { APP_USER_INFO } from 'ActionTypes';
 import { AppClass } from 'models/App';
-import { App } from 'models';
+import { App } from '@models';
 
 const initialState: any = new AppClass();
 

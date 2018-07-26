@@ -1,14 +1,15 @@
 import { Record, List } from 'immutable';
-import { Props, MediaProps } from './Chat.d';
+import { Props, Message, MsgType, MediaProps } from './Chat.d';
 
 export class ChatCLass extends Record<Props>({
-  media: List<MediaProps>(),
+  messages: List<Message>(),
 }) {
 
-  add(media: MediaProps) {
-    console.log(111);
-    console.log(media);
+  add(type: MsgType, message: MediaProps | string) {
+    console.debug('store.chat.add()');
 
-    return this.set('media', this.media.push(media));
+    return this.set('messages', this.messages.push({
+      type, message,
+    }));
   }
 }

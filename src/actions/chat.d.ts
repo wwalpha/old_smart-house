@@ -1,7 +1,7 @@
-import { ActionFunction0, ActionFunction1, createAction, BaseAction, Action } from "redux-actions";
+import { ActionFunction0, ActionFunction1, createAction, BaseAction, Action, ActionFunction2 } from "redux-actions";
 import { ActionCreatorsMapObject, ActionCreator } from "redux";
 import { Chat } from 'models';
 
 export interface Actions extends ActionCreatorsMapObject {
-  saveRecordFile: ActionFunction1<Chat.MediaProps, Action<Chat.Payload.SaveRecordFile>>,
+  addMessage: ActionFunction2<Chat.MsgType, string, Action<Chat.Payload.AddMessage>>,
 }

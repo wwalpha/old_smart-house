@@ -1,21 +1,13 @@
 import * as React from 'react';
 import { withStyles, Theme, StyleRules } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import AudioPlay from 'components/chat/AudioPlay';
+import MessageItem from 'components/chat/MessageItem';
 import { Props } from './Main.d';
-import { Chat } from 'models';
+import { Chat } from '@models';
 
 class Main extends React.Component<Props, {}> {
-  // componentDidUpdate(prevProps: Props, prevState: any) {
-  //   const div: HTMLDivElement = document.getElementById('chat_main') as HTMLDivElement;
-
-  //   div.scrollIntoView({
-  //     block: 'end',
-  //   });
-  // }
-
   render() {
-    const { media = [], classes } = this.props;
+    const { messages = [], classes } = this.props;
 
     return (
       <Grid
@@ -25,8 +17,8 @@ class Main extends React.Component<Props, {}> {
         classes={{ container: classes.root }}
       >
         {(() => {
-          return media.map((item: Chat.MediaProps, index: number) => (
-            <AudioPlay media={item} key={index} />
+          return messages.map((item: Chat.MediaProps, index: number) => (
+            <MessageItem media={item} key={index} />
           ));
         })()}
       </Grid>

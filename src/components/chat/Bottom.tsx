@@ -6,48 +6,19 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Collapse from '@material-ui/core/Collapse';
 import MicIcon from '@material-ui/icons/Mic';
-import { Storage, API, graphqlOperation } from 'aws-amplify';
-import { readFile } from 'utils/fileSystem';
 import { getTimeStamp } from 'utils/system';
 import { Chat, App } from 'models';
 import { Props, State } from './Bottom.d';
-import { Config } from 'utils/aws';
 
 class Bottom extends React.Component<Props, {}> {
   state: State = {
     media: undefined,
-    value: undefined,
+    chat: undefined,
     isRecording: false,
-    inputValue: undefined,
   };
 
-  handleChange = (event: React.ChangeEvent<{}>, value: any) => this.setState({ value });
-
-  upload = async (media: Chat.MediaProps) => {
-    const fullpath = `${cordova.file.tempDirectory}${media.filename}`;
-
-    const file: any = await readFile(fullpath);
-
-    const ret = await Storage.put(media.filename, file, { contentType: 'audio/wav' });
-
-    console.log('ret', ret);
-
-    const addMessage = `mutation AddMessage($bucket: String!, $key: String!, $region: String!, $mimeType: String!) {
-      addMessage(bucket: $bucket, key: $key, region: $region, mimeType: $mimeType) {
-        signedURL
-      }
-    }`;
-
-    // Mutation
-    const values = {
-      bucket: Config.aws_user_files_s3_bucket,
-      key: `public/${media.filename}`,
-      region: Config.aws_project_region,
-      mimeType: 'audio/wav',
-    };
-
-    return await (API.graphql(graphqlOperation(addMessage, values)) as Promise<any>);
-  }
+  /** 入力変更 */
+  handleChange = (e: any) => this.setState({ chat: e.target.value });
 
   /** 録音開始 */
   handleTouchStart = (e: any) => {
@@ -84,21 +55,21 @@ class Bottom extends React.Component<Props, {}> {
 
       this.setState({ isRecording: false });
 
-      this.upload(media)
-        .then(console.log)
-        .catch(console.log);
+      // メッセージ送信
+      this.props.addMessage('Media', media);
     }
   }
 
-  handlePlay = () => {
-    const { media } = this.state;
-
-    if (media) media.file.play();
-  }
-
+  /** フォームサブミット */
   handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(this.state.inputValue);
+
+    if (this.state.chat) {
+      this.props.addMessage('Text', this.state.chat);
+    }
+
+    // 入力値をクリアする
+    this.setState({ chat: undefined });
   }
 
   render() {
@@ -124,10 +95,10 @@ class Bottom extends React.Component<Props, {}> {
               <MicIcon />
             </Button>
             <Input
-              value={this.state.inputValue}
+              value={this.state.chat}
               classes={{ root: classes.input }}
               style={{ display: isRecording ? 'none' : 'inherit' }}
-              onChange={(e: any) => this.setState({ inputValue: e.target.value })}
+              onChange={this.handleChange}
             />
           </Grid>
         </form>

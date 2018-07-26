@@ -38,11 +38,11 @@
       "models/*": [
         "./src/models/*"
       ],
-      "models": [
+      "@models": [
         "./src/models/index.d.ts"
       ],
-      "ActionTypes": [
-        "./src/constants/ActionTypes"
+      "ActionType": [
+        "./src/constants/ActionTypes.ts"
       ]
     }
   },

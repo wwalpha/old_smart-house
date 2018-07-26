@@ -1,8 +1,8 @@
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
 import { List } from "immutable";
-import { Chat } from "models";
+import { Chat } from "@models";
 
 export interface Props extends WithStyles<StyleRules> {
-  media?: Chat.MediaProps[],
+  messages: Chat.Message[],
 }
 

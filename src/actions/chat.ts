@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions';
 import {
-  SAVE_MEDIA,
+  ADD_MESSAGE,
 } from 'src/constants/ActionTypes';
 import { MediaProps } from 'models/Chat.d';
 
-export const saveRecordFile = createAction(SAVE_MEDIA, (media: MediaProps) => ({ media }));
+export const addMessage = createAction(ADD_MESSAGE, (type: string, message: MediaProps | string) => ({ type, message }));

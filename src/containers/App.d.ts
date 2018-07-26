@@ -1,6 +1,6 @@
 import { WithStyles, StyleRules } from "@material-ui/core/styles";
 import * as AppActions from 'actions/app.d';
-import { App } from "models";
+import { App } from "@models";
 
 export interface DispatchToProps {
   actions: AppActions.Actions,

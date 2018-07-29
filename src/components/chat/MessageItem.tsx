@@ -26,28 +26,28 @@ class MessageItem extends React.Component<Props, State> {
   sendMessage = () => {
     // テキスト送信
     if (this.props.item.type === 'Text') {
-      // sendText(this.props.item.message as string)
-      //   .then(() => this.setState({ isSended: true }))
-      //   .catch(console.error);
+      sendText(this.props.item.message as string)
+        .then(() => this.setState({ isSended: true }))
+        .catch(console.error);
     }
     // Media送信
     if (this.props.item.type === 'Media') {
-      // sendMedia((this.props.item.message as Chat.MediaProps).filename)
-      //   .then(() => this.setState({ isSended: true }))
-      //   .catch(console.error);
+      sendMedia((this.props.item.message as Chat.MediaProps).filename)
+        .then(() => this.setState({ isSended: true }))
+        .catch(console.error);
     }
   }
 
   handlePlay = () => {
     console.log('play start');
 
-    this.setState({ playing: true });
+    this.setState({ isPlaying: true });
 
     // Mediaファイルの場合、再生する
     if (this.props.item.type === 'Media') {
       (this.props.item.message as Chat.MediaProps).file.play();
 
-      this.setState({ playing: false });
+      this.setState({ isPlaying: false });
     }
 
     console.log('disabled');
@@ -69,7 +69,6 @@ class MessageItem extends React.Component<Props, State> {
       this.sendMessage();
     }
 
-    console.log('item');
     return (
       <Grid
         container

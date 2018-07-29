@@ -33,9 +33,9 @@ export const sendMedia = async (fileName: string) => {
 
 export const sendText = async (message: string) => {
   // Mutataion
-  const addMessage = `mutation AddMessage($bucket: String!, $key: String!, $region: String!, $mimeType: String!) {
-    addMessage(bucket: $bucket, key: $key, region: $region, mimeType: $mimeType) {
-      signedURL
+  const addMessage = `mutation AddText($message: String!) {
+    addTextMessage(message: $message) {
+      message
     }
   }`;
 

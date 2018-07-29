@@ -26,10 +26,10 @@ const start = (userInfo: any) => {
 
 // (global as any).fetch = require('node-fetch');
 
-// Amplify.configure(Config);
+Amplify.configure(Config);
 
-const username: string = 'test11';
-const password: string = 'Test1234567890';
+const username: string = 'test12';
+const password: string = 'Test-1234567890+';
 
 // const AUTH_TYPE = require('aws-appsync/lib/link/auth-link').AUTH_TYPE;
 
@@ -151,14 +151,14 @@ const password: string = 'Test1234567890';
 // };
 
 if (isIOS) {
-  // document.addEventListener(
-  //   'deviceready',
-  //   () => Cognito.login(username, password).then(userInfo => start(userInfo)),
-  //   false);
-  start(undefined);
+  document.addEventListener(
+    'deviceready',
+    () => Cognito.login(username, password).then(userInfo => start(userInfo)),
+    false);
+  // start(undefined);
 } else {
-  // Cognito.login(username, password)
-  //   .then(userInfo => start(userInfo))
-  //   .catch(console.log);
-  start(undefined);
+  Cognito.login(username, password)
+    .then(userInfo => start(userInfo))
+    .catch(console.log);
+  // start(undefined);
 }
